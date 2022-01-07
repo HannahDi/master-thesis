@@ -4,12 +4,12 @@
 title: FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks
 author: Hannah Dienhart
 copyright: "2022"
-logo: EnzML-favicon-32x32.svg
+logo: images/EnzML-favicon-32x32.svg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: off
 
 # Define the name of the latex output file for PDF builds
 # Not used, pdf is builed from HTML

@@ -1,3 +1,6 @@
+# Data
+data/*
+
 # Sphinx documentation
 book/_build/*
 

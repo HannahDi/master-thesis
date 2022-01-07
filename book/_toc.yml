@@ -2,7 +2,19 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
-chapters:
-- file: markdown
-- file: notebooks
+root: welcome
+parts:
+- chapters:
+  - file: declaration
+  - file: abstract
+  - file: acknowledgements
+  - file: toc-page
+  - file: intro
+  - file: scenarios
+    sections:
+    - file: markdown
+    - file: notebooks
+  - file: discussion
+  - file: conclusion
+  - file: references
+  - file: appendix
