@@ -10,3 +10,6 @@ book/_build/*
 # IPython
 profile_default/
 ipython_config.py
+
+# requirements preparation
+freeze.txt
