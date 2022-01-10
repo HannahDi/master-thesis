@@ -12,6 +12,7 @@ parts:
   - file: intro
   - file: scenarios
     sections:
+    - file: Scenarios/Scenario1
     - file: markdown
     - file: notebooks
   - file: discussion
