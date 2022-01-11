@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenario 1: Collecting data by BioCatHub and visualisation &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Markdown Files" href="../markdown.html" />
+    <link rel="prev" title="Scenarios" href="../scenarios.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/EnzML-favicon-32x32.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of Originality
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../toc-page.html">
+   Contents
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../scenarios.html">
+   Scenarios
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Scenario 1: Collecting data by BioCatHub and visualisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../markdown.html">
+     Markdown Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../notebooks.html">
+     Content with notebooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Scenarios/Scenario1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/HannahDi/master-thesis"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/HannahDi/master-thesis/master?urlpath=tree/book/Scenarios/Scenario1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports-a-class-anchor-name-imports-a">
+   Imports
+   <a class="anchor" name="Imports">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+   Reading EnzymeML with PyEnzyme software
+   <a class="anchor" name="ReadingEnzymeML">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation-a-class-anchor-name-datapreparation-a">
+   Data preparation
+   <a class="anchor" name="DataPreparation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data-a-class-anchor-name-visualisation-a">
+   Visualisation of time-course data
+   <a class="anchor" name="Visualisation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+   Upload to DaRUS
+   <a class="anchor" name="Upload">
+   </a>
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario 1: Collecting data by BioCatHub and visualisation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports-a-class-anchor-name-imports-a">
+   Imports
+   <a class="anchor" name="Imports">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+   Reading EnzymeML with PyEnzyme software
+   <a class="anchor" name="ReadingEnzymeML">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation-a-class-anchor-name-datapreparation-a">
+   Data preparation
+   <a class="anchor" name="DataPreparation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data-a-class-anchor-name-visualisation-a">
+   Visualisation of time-course data
+   <a class="anchor" name="Visualisation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+   Upload to DaRUS
+   <a class="anchor" name="Upload">
+   </a>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div style="page-break-after:always;"></div><div class="tex2jax_ignore mathjax_ignore section" id="scenario-1-collecting-data-by-biocathub-and-visualisation">
+<h1>Scenario 1: Collecting data by BioCatHub and visualisation<a class="headerlink" href="#scenario-1-collecting-data-by-biocathub-and-visualisation" title="Permalink to this headline">¶</a></h1>
+<p>Dataset provided by Jan Spöring (Institute of Bio- and Geosciences 1, Forschungszentrum Jülich, 52428 Jülich, Germany)</p>
+<p>In this scenario the original dataset was created with <a class="reference external" href="https://biocathub.net">BioCatHub</a>.<br />
+The time-course data is visualised in this Jupyter Notebook.</p>
+<div class="section" id="imports-a-class-anchor-name-imports-a">
+<h2>Imports <a class="anchor" name="Imports"></a><a class="headerlink" href="#imports-a-class-anchor-name-imports-a" title="Permalink to this headline">¶</a></h2>
+<p>All necessary Python packages are installed and imported.<br />
+If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
+In order to run on google Colaboratory (Colab), PyEnzyme will be installed and the dataset is loaded from GitHub. This is done in the first Code Cell.<br />
+To run the notebook on Colab click on the badge:<br />
+<a class="reference external" href="https://colab.research.google.com/github/EnzymeML/Lauterbach_2021/blob/main/Scenario3/CollectingDataByBioCatHubAndVisualisation.ipynb"><img alt="Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a><br />
+If you run this notebook local make sure you have all Packages installed and the dataset in the same directory as the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
+    <span class="o">!</span>pip install git+git://github.com/EnzymeML/PyEnzyme.git@feature/experiment-class
+    <span class="o">!</span>wget https://github.com/EnzymeML/Lauterbach_2021/raw/main/Scenario3/PropioinSynthesis_Spoering.omex
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not running on Colab.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Not running on Colab.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.tools</span> <span class="kn">import</span> <span class="n">EnzymeMLReader</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+<h2>Reading EnzymeML with PyEnzyme software <a class="anchor" name="ReadingEnzymeML"></a><a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a" title="Permalink to this headline">¶</a></h2>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
+When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Spoering_Measurements_orig.omex&#39;</span>
+
+<span class="c1"># check for correct file path and file extension:</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLReader</span><span class="p">()</span><span class="o">.</span><span class="n">readFromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect file path.&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Units
+	ID: u0 	 Name: ml
+	ID: u1 	 Name: mmole / l
+	ID: u2 	 Name: mg / ml
+	ID: u3 	 Name: K
+	ID: u4 	 Name: s
+&gt;&gt;&gt; Reactants
+	ID: s0 	 Name: Propanal
+	ID: s1 	 Name: Propioin
+&gt;&gt;&gt; Proteins
+	ID: p0 	 Name: Benzoin Aldolase
+&gt;&gt;&gt; Reactions
+	ID: r0 	 Name: Propioin synthesis
+&gt;&gt;&gt; Measurements
+
+ID   Species   Conc     Unit   
+===============================
+m0   p0        30     mg / ml  
+m0   s0        200    mmole / l
+m0   s1        0      mmole / l
+                               
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview shows which reactant corresponds to which id.<br />
+Each measurement consists of 2 reactants and one protein (p0).
+In this case only 1 measurement was conducted and is examined in the next output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+<span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getSpeciesDict</span><span class="p">()</span>
+
+<span class="c1"># Access the measurement data per reactant/protein</span>
+<span class="k">for</span> <span class="n">speciesType</span><span class="p">,</span> <span class="n">speciesDict</span> <span class="ow">in</span> <span class="n">measurementDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Extract all the data</span>
+    <span class="k">for</span> <span class="n">speciesID</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">speciesDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">initConc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getInitConc</span><span class="p">()</span>
+        <span class="n">unitID</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getUnit</span><span class="p">()</span>
+        <span class="n">unitString</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitString</span><span class="p">(</span><span class="n">unitID</span><span class="p">)</span>
+        <span class="n">replicates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">speciesID</span><span class="si">}</span><span class="s2">: InitConc = </span><span class="si">{</span><span class="n">initConc</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unitString</span><span class="si">}</span><span class="s2"> ; NumReplicates = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">replicates</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propioin synthesis 1
+p0: InitConc = 30.0 mg / ml ; NumReplicates = 0
+s0: InitConc = 200.0 mmole / l ; NumReplicates = 3
+s1: InitConc = 0.0 mmole / l ; NumReplicates = 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview of the measurement shows that the product propioin (s1) has 3 replicates.</p>
+</div>
+<div class="section" id="data-preparation-a-class-anchor-name-datapreparation-a">
+<h2>Data preparation <a class="anchor" name="DataPreparation"></a><a class="headerlink" href="#data-preparation-a-class-anchor-name-datapreparation-a" title="Permalink to this headline">¶</a></h2>
+<p>In this scenario we are only interested in the visualisation of the time-course data for propioin. To extract the relevant data the inbuilt function <code class="docutils literal notranslate"><span class="pre">exportData</span></code> for the measurement is used. It returns a dictionary with initial concentrations and the time-course data stored in a pandas dataframe, which can be use for a simple visualisation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get reaction name for the title of the visualisation</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+
+<span class="c1"># get time-course data and prepare it for visualisation</span>
+<span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">exportData</span><span class="p">()</span>
+<span class="n">time_course_data</span> <span class="o">=</span> <span class="n">measurementDict</span><span class="p">[</span><span class="s1">&#39;reactants&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<span class="n">time_course_data</span> <span class="o">=</span> <span class="n">time_course_data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">time_course_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">time_course_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prod1_repl1/s0/u1</th>
+      <th>prod1_repl2/s0/u1</th>
+      <th>prod1_repl3/s0/u1</th>
+    </tr>
+    <tr>
+      <th>time/u4</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15.0</th>
+      <td>63.784611</td>
+      <td>66.106679</td>
+      <td>67.447746</td>
+    </tr>
+    <tr>
+      <th>30.0</th>
+      <td>77.957073</td>
+      <td>80.538850</td>
+      <td>81.174757</td>
+    </tr>
+    <tr>
+      <th>60.0</th>
+      <td>80.241658</td>
+      <td>85.079882</td>
+      <td>88.266513</td>
+    </tr>
+    <tr>
+      <th>120.0</th>
+      <td>81.314628</td>
+      <td>90.150488</td>
+      <td>85.021530</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="visualisation-of-time-course-data-a-class-anchor-name-visualisation-a">
+<h2>Visualisation of time-course data <a class="anchor" name="Visualisation"></a><a class="headerlink" href="#visualisation-of-time-course-data-a-class-anchor-name-visualisation-a" title="Permalink to this headline">¶</a></h2>
+<p>The plot shows the synthesis of propioin from propanal. The initial concentration of propanal was 200 mM and two propanal form one propioin. Not all propanal was converted.<br />
+In order to save the figure as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_course_data</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">reaction_name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [min]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration [mM]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario1_13_0.png" src="../_images/Scenario1_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="upload-to-darus-a-class-anchor-name-upload-a">
+<h2>Upload to DaRUS <a class="anchor" name="Upload"></a><a class="headerlink" href="#upload-to-darus-a-class-anchor-name-upload-a" title="Permalink to this headline">¶</a></h2>
+<p>Finally, the EnzymeML document is published on DaRUS and written to the current directory.<br />
+In order to publish a dataset to DaRUS you need an API Token.<br />
+If you want to publish set the <code class="docutils literal notranslate"><span class="pre">publish</span></code> variable to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Then you will be asked for your API Token.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">publish</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
+    <span class="n">API_Token</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter API Token&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">uploadToDataverse</span><span class="p">(</span>
+        <span class="n">baseURL</span><span class="o">=</span><span class="s2">&quot;https://darus.uni-stuttgart.de/&quot;</span><span class="p">,</span>
+        <span class="n">API_Token</span><span class="o">=</span> <span class="n">API_Token</span><span class="p">,</span>
+        <span class="n">dataverseName</span><span class="o">=</span><span class="s2">&quot;enzymeml_at_work&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../scenarios.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Scenarios</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../markdown.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Markdown Files</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Hannah Dienhart<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
