@@ -13,8 +13,6 @@ parts:
   - file: scenarios
     sections:
     - file: Scenarios/Scenario1
-    - file: markdown
-    - file: notebooks
   - file: discussion
   - file: conclusion
   - file: references
