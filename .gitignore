@@ -1,5 +1,5 @@
 # Data
-data/*
+data/Rosenthal*
 
 # Sphinx documentation
 book/_build/*
