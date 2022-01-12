@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenario 2: Measuring the stability of enzymes &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/EnzML-favicon-32x32.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of Originality
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../toc-page.html">
+   Contents
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../scenarios.html">
+   Scenarios
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario1.html">
+     Scenario 1: Collecting data by BioCatHub and visualisation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Scenarios/Scenario2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/HannahDi/master-thesis"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/HannahDi/master-thesis/master?urlpath=tree/book/Scenarios/Scenario2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
+   Reading EnzymeML with PyEnzyme software
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+   Visualisation of time-course data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-of-initial-rates">
+   Computation of initial rates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
+   Visualisation of the rates
+   <a class="anchor" name="RatesVisualisation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus">
+   Upload to DaRUS
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario 2: Measuring the stability of enzymes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
+   Reading EnzymeML with PyEnzyme software
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+   Visualisation of time-course data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-of-initial-rates">
+   Computation of initial rates
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
+   Visualisation of the rates
+   <a class="anchor" name="RatesVisualisation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus">
+   Upload to DaRUS
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="scenario-2-measuring-the-stability-of-enzymes">
+<h1>Scenario 2: Measuring the stability of enzymes<a class="headerlink" href="#scenario-2-measuring-the-stability-of-enzymes" title="Permalink to this headline">¶</a></h1>
+<p>Data provided by Amalie Vang Høst (Department of Chemical and Biochemical Engineering, Technical University of Denmark, 2800 Kgs Lyngby, Denmark)</p>
+<p>The dataset for this and all following scenarios were created by Simone Lauterbach. Usually the project partners filled out an EnzymeML spreadsheet template, which is a structured Excel file with Makros. Simone checked the spreadsheets for completeness and converted them into EnzymeML documents.<br />
+In this scenario the time-course data from the EnzymeML document is analysed visually and initial rates are calculated. The analysis of initial rates is very common by many of our project partners and in biocatalysis in general.<br />
+This analysis is a reproduction of the analysis done by Vang Høst in Excel, which she provided us with.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>First all necessary Python packages must be installed and imported.<br />
+This step is the same for all scenarios and differs only in the used python packages.
+If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
+If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.tools</span> <span class="kn">import</span> <span class="n">EnzymeMLReader</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-enzymeml-with-pyenzyme-software">
+<h2>Reading EnzymeML with PyEnzyme software<a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software" title="Permalink to this headline">¶</a></h2>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
+If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or to change the path accordingly.<br />
+When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Host_Measurements_orig.omex&#39;</span>
+
+<span class="c1"># check for correct file path and file extension:</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLReader</span><span class="p">()</span><span class="o">.</span><span class="n">readFromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect file path.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Units
+	ID: u0 	 Name: ml
+	ID: u1 	 Name: mole / l
+	ID: u2 	 Name: g / l
+	ID: u3 	 Name: K
+	ID: u4 	 Name: sec
+&gt;&gt;&gt; Reactants
+	ID: s0 	 Name: Glucose
+	ID: s1 	 Name: water
+	ID: s2 	 Name: O2
+	ID: s3 	 Name: 4-aminoantipyrine
+	ID: s4 	 Name: 3,5-dichloro-2-hydroxybenzenesulfonic acid
+	ID: s5 	 Name: Gluconic acid
+	ID: s6 	 Name: pink product
+&gt;&gt;&gt; Proteins
+	ID: p0 	 Name: Glucose Oxidase
+&gt;&gt;&gt; Reactions
+	ID: r0 	 Name: Deactivation of glucose oxidase
+&gt;&gt;&gt; Measurements
+
+ID    Species   Conc      Unit  
+================================
+m0    p0        0.500   g / l   
+m0    s0        1       mole / l
+m0    s1        0       mole / l
+m0    s2        0       mole / l
+m0    s3        1       mole / l
+m0    s4        10      mole / l
+m0    s5        0       mole / l
+m0    s6        0       mole / l
+m1    p0        0.500   g / l   
+m1    s0        1       mole / l
+m1    s1        0       mole / l
+m1    s2        0       mole / l
+m1    s3        1       mole / l
+m1    s4        10      mole / l
+m1    s5        0       mole / l
+m1    s6        0       mole / l
+m2    p0        0.500   g / l   
+m2    s0        1       mole / l
+m2    s1        0       mole / l
+m2    s2        0       mole / l
+m2    s3        1       mole / l
+m2    s4        10      mole / l
+m2    s5        0       mole / l
+m2    s6        0       mole / l
+m3    p0        0.500   g / l   
+m3    s0        1       mole / l
+m3    s1        0       mole / l
+m3    s2        0       mole / l
+m3    s3        1       mole / l
+m3    s4        10      mole / l
+m3    s5        0       mole / l
+m3    s6        0       mole / l
+m4    p0        0.500   g / l   
+m4    s0        1       mole / l
+m4    s1        0       mole / l
+m4    s2        0       mole / l
+m4    s3        1       mole / l
+m4    s4        10      mole / l
+m4    s5        0       mole / l
+m4    s6        0       mole / l
+m5    p0        0.500   g / l   
+m5    s0        1       mole / l
+m5    s1        0       mole / l
+m5    s2        0       mole / l
+m5    s3        1       mole / l
+m5    s4        10      mole / l
+m5    s5        0       mole / l
+m5    s6        0       mole / l
+m6    p0        0.500   g / l   
+m6    s0        1       mole / l
+m6    s1        0       mole / l
+m6    s2        0       mole / l
+m6    s3        1       mole / l
+m6    s4        10      mole / l
+m6    s5        0       mole / l
+m6    s6        0       mole / l
+m7    p0        0.500   g / l   
+m7    s0        1       mole / l
+m7    s1        0       mole / l
+m7    s2        0       mole / l
+m7    s3        1       mole / l
+m7    s4        10      mole / l
+m7    s5        0       mole / l
+m7    s6        0       mole / l
+m8    p0        0.500   g / l   
+m8    s0        1       mole / l
+m8    s1        0       mole / l
+m8    s2        0       mole / l
+m8    s3        1       mole / l
+m8    s4        10      mole / l
+m8    s5        0       mole / l
+m8    s6        0       mole / l
+m9    p0        0.500   g / l   
+m9    s0        1       mole / l
+m9    s1        0       mole / l
+m9    s2        0       mole / l
+m9    s3        1       mole / l
+m9    s4        10      mole / l
+m9    s5        0       mole / l
+m9    s6        0       mole / l
+m10   p0        0.500   g / l   
+m10   s0        1       mole / l
+m10   s1        0       mole / l
+m10   s2        0       mole / l
+m10   s3        1       mole / l
+m10   s4        10      mole / l
+m10   s5        0       mole / l
+m10   s6        0       mole / l
+                                
+</pre></div>
+</div>
+</div>
+</div>
+<p>This experiment consists of 11 measurements and each measurement consists of 7 reactants (s0 -s6) and one protein (p0).<br />
+For initial rate calculation only  the time-course data is needed, this is usually analysed in relation to different initial concentrations of the substrate. In this case the stability of the enzyme is of interest, therefore, all 11 measurements (m0 - m10) were carried out under identical conditions and with identical initial concentrations, but the time to add the substrate and start the reaction varied, this information was stored in the measurement names.<br />
+Next one measurement is exemplarily examined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
+<span class="n">measurement0</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measurement0</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+<span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement0</span><span class="o">.</span><span class="n">getSpeciesDict</span><span class="p">()</span>
+
+<span class="c1"># Access the measurement data per reactant/protein</span>
+<span class="k">for</span> <span class="n">speciesType</span><span class="p">,</span> <span class="n">speciesDict</span> <span class="ow">in</span> <span class="n">measurementDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Extract all the data</span>
+    <span class="k">for</span> <span class="n">speciesID</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">speciesDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">initConc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getInitConc</span><span class="p">()</span>
+        <span class="n">unitID</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getUnit</span><span class="p">()</span>
+        <span class="n">unitString</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitString</span><span class="p">(</span><span class="n">unitID</span><span class="p">)</span>
+        <span class="n">replicates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">speciesID</span><span class="si">}</span><span class="s2">: initial concentration = </span><span class="si">{</span><span class="n">initConc</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unitString</span><span class="si">}</span><span class="s2"> ; number of replicates = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">replicates</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Measurement after 0 min
+p0: initial concentration = 0.5 g / l ; number of replicates = 0
+s0: initial concentration = 1.0 mole / l ; number of replicates = 0
+s1: initial concentration = 0.0 mole / l ; number of replicates = 0
+s2: initial concentration = 0.0 mole / l ; number of replicates = 0
+s3: initial concentration = 1.0 mole / l ; number of replicates = 0
+s4: initial concentration = 10.0 mole / l ; number of replicates = 0
+s5: initial concentration = 0.0 mole / l ; number of replicates = 3
+s6: initial concentration = 0.0 mole / l ; number of replicates = 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview of the initial measurement shows, that the product Gluconic acid (s5) has 3 replicates, these contain the measured time-course data.</p>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>In this experiment to analyse the stability of the enzyme only the change of the initial rates over time is of interest. Therefore only the measured time-course data and the measurement names containing the time information are stored for each measurement. In order to extract the information of the measurement time, string manipulation is used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise datastructure to store experimental data</span>
+<span class="n">experimentalData</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># time and substrate concentration unit</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getGlobalTime</span><span class="p">(),</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">timeUnit</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitDict</span><span class="p">()[</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getGlobalTimeUnit</span><span class="p">()]</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="n">concentrationUnit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># go through all measurements:</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurementDict</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+    <span class="n">measurementData</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s1">&#39;measuring time min&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="s1">&#39;measuring time h&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;measured&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># get replicates with time course data:</span>
+    <span class="n">reactant</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s5&#39;</span><span class="p">)</span>
+    <span class="n">replicates</span> <span class="o">=</span> <span class="n">reactant</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">replicates</span><span class="p">:</span>
+        <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replicate</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">experimentalData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualisation-of-time-course-data">
+<h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
+<p>All time-course data is visualised with the Python library matplotlib.</p>
+<p>In order to save the figures as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for time-course visualisation</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#a6cee3&#39;</span><span class="p">,</span><span class="s1">&#39;#1f78b4&#39;</span><span class="p">,</span><span class="s1">&#39;#b2df8a&#39;</span><span class="p">,</span><span class="s1">&#39;#33a02c&#39;</span><span class="p">,</span><span class="s1">&#39;#fb9a99&#39;</span><span class="p">,</span><span class="s1">&#39;#fdbf6f&#39;</span><span class="p">,</span><span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span><span class="s1">&#39;#cab2d6&#39;</span><span class="p">,</span><span class="s1">&#39;#6a3d9a&#39;</span><span class="p">,</span><span class="s1">&#39;#ffff99&#39;</span><span class="p">,</span><span class="s1">&#39;#b15928&#39;</span><span class="p">]</span>
+<span class="c1"># plot time course data with matplotlib</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">experimentalData</span><span class="p">)):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">experimentalData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;measuring time min&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; [min]&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; [h]&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">experimentalData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;measured&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">reaction_name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;expand&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario2_11_0.png" src="../_images/Scenario2_11_0.png" />
+</div>
+</div>
+<p>The figure shows that the curves were less steep the more time passed.</p>
+</div>
+<div class="section" id="computation-of-initial-rates">
+<h2>Computation of initial rates<a class="headerlink" href="#computation-of-initial-rates" title="Permalink to this headline">¶</a></h2>
+<p>To calculate the initial rates the slope of the first 30 data points (0 to 29 seconds) for each replicate is calculated, to be consistent with the calculations done by Vang Høst. This is done with linear regression by the Python library SciPy.<br />
+In order to calculate the slope of another fraction of the time-course change the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> variable accordingly, <code class="docutils literal notranslate"><span class="pre">end</span></code> should not be greater than 59.<br />
+Then the mean from the 3 replicates is calculated for each measurement and saved in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
+With an extinction coefficient of 26 the rates are determined as follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\( rate = \frac{meanOfSlope}{26}*1000\)</span></p>
+</div></blockquote>
+<p>and also stored in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
+And finally the residual activity compared to the initial activity is calculated and stored as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">29</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">experimentalData</span><span class="p">:</span>
+    <span class="n">slopes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]:</span>
+        <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">],</span> <span class="n">replicate</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+        <span class="n">slopes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+    <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;slope&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;v0&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">(</span><span class="n">slope</span><span class="o">/</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;residual activity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;v0&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">experimentalData</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;v0&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
+<h2>Visualisation of the rates <a class="anchor" name="RatesVisualisation"></a><a class="headerlink" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a" title="Permalink to this headline">¶</a></h2>
+<p>First the rates are plotted over the time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">experimentalData</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;measuring time h&#39;</span><span class="p">],</span> <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;v0&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [h]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;average rate [g/l * 1/s]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;rates.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario2_16_0.png" src="../_images/Scenario2_16_0.png" />
+</div>
+</div>
+<p>Second the residual of the rates is plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">experimentalData</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;measuring time h&#39;</span><span class="p">],</span> <span class="n">measurement</span><span class="p">[</span><span class="s1">&#39;residual activity&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [h]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;residual activity [%]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;residual-activity.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario2_18_0.png" src="../_images/Scenario2_18_0.png" />
+</div>
+</div>
+<p>The figures show a decrease of the initial rates over time, which corresponds to the activity of the enzyme. This suggests instability of the enzyme in the given conditions. The greatest loss of activity seems to happen very fast in the first minute.</p>
+</div>
+<div class="section" id="upload-to-darus">
+<h2>Upload to DaRUS<a class="headerlink" href="#upload-to-darus" title="Permalink to this headline">¶</a></h2>
+<p>Since this scenario is part of a paper, that is momentarily written. It was uploaded to a DataVerse for this paper on <strong>DaRUS</strong> the data repository of the University of Stuttgart.<br />
+There it got the DOI:</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Hannah Dienhart<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
