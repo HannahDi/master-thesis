@@ -381,14 +381,15 @@ This analysis is a reproduction of the analysis done by Vang Høst in Excel, whi
 <p>First all necessary Python packages must be installed and imported.<br />
 This step is the same for all scenarios and differs only in the used python packages.
 If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
-If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.tools</span> <span class="kn">import</span> <span class="n">EnzymeMLReader</span>
+<span class="kn">from</span> <span class="nn">pyenzyme</span> <span class="kn">import</span> <span class="n">EnzymeMLDocument</span>
 </pre></div>
 </div>
 </div>
@@ -399,26 +400,23 @@ If you run this notebook local make sure you have all Packages installed. All ne
 <p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
 If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or to change the path accordingly.<br />
 When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Host_Measurements_orig.omex&#39;</span>
 
 <span class="c1"># check for correct file path and file extension:</span>
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
-    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLReader</span><span class="p">()</span><span class="o">.</span><span class="n">readFromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">printDocument</span><span class="p">(</span><span class="n">measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect file path.&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Couldnt find file at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Units
-	ID: u0 	 Name: ml
-	ID: u1 	 Name: mole / l
-	ID: u2 	 Name: g / l
-	ID: u3 	 Name: K
-	ID: u4 	 Name: sec
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Host_Measurements
 &gt;&gt;&gt; Reactants
 	ID: s0 	 Name: Glucose
 	ID: s1 	 Name: water
@@ -429,6 +427,7 @@ When running the next code cell the EnzymeML document is saved in the <code clas
 	ID: s6 	 Name: pink product
 &gt;&gt;&gt; Proteins
 	ID: p0 	 Name: Glucose Oxidase
+&gt;&gt;&gt; Complexes
 &gt;&gt;&gt; Reactions
 	ID: r0 	 Name: Deactivation of glucose oxidase
 &gt;&gt;&gt; Measurements
@@ -535,33 +534,20 @@ Next one measurement is exemplarily examined.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
 <span class="n">measurement0</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">measurement0</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
-<span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement0</span><span class="o">.</span><span class="n">getSpeciesDict</span><span class="p">()</span>
-
-<span class="c1"># Access the measurement data per reactant/protein</span>
-<span class="k">for</span> <span class="n">speciesType</span><span class="p">,</span> <span class="n">speciesDict</span> <span class="ow">in</span> <span class="n">measurementDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="c1"># Extract all the data</span>
-    <span class="k">for</span> <span class="n">speciesID</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">speciesDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">initConc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getInitConc</span><span class="p">()</span>
-        <span class="n">unitID</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getUnit</span><span class="p">()</span>
-        <span class="n">unitString</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitString</span><span class="p">(</span><span class="n">unitID</span><span class="p">)</span>
-        <span class="n">replicates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">speciesID</span><span class="si">}</span><span class="s2">: initial concentration = </span><span class="si">{</span><span class="n">initConc</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unitString</span><span class="si">}</span><span class="s2"> ; number of replicates = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">replicates</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
+<span class="n">measurement0</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Measurement after 0 min
-p0: initial concentration = 0.5 g / l ; number of replicates = 0
-s0: initial concentration = 1.0 mole / l ; number of replicates = 0
-s1: initial concentration = 0.0 mole / l ; number of replicates = 0
-s2: initial concentration = 0.0 mole / l ; number of replicates = 0
-s3: initial concentration = 1.0 mole / l ; number of replicates = 0
-s4: initial concentration = 10.0 mole / l ; number of replicates = 0
-s5: initial concentration = 0.0 mole / l ; number of replicates = 3
-s6: initial concentration = 0.0 mole / l ; number of replicates = 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Measurement m0: Measurement after 0 min
+    s0 | initial conc: 1.0 mole / l 	| #replicates: 0
+    s1 | initial conc: 0.0 mole / l 	| #replicates: 0
+    s2 | initial conc: 0.0 mole / l 	| #replicates: 0
+    s3 | initial conc: 1.0 mole / l 	| #replicates: 0
+    s4 | initial conc: 10.0 mole / l 	| #replicates: 0
+    s5 | initial conc: 0.0 mole / l 	| #replicates: 3
+    s6 | initial conc: 0.0 mole / l 	| #replicates: 0
+    p0 | initial conc: 0.5 g / l 	| #replicates: 0
 </pre></div>
 </div>
 </div>
@@ -577,13 +563,14 @@ s6: initial concentration = 0.0 mole / l ; number of replicates = 0
 <span class="n">experimentalData</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># time and substrate concentration unit</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getGlobalTime</span><span class="p">(),</span> <span class="nb">float</span><span class="p">)</span>
-<span class="n">timeUnit</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitDict</span><span class="p">()[</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getGlobalTimeUnit</span><span class="p">()]</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">global_time</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">timeUnit</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">global_time_unit</span>
 <span class="n">concentrationUnit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
 <span class="c1"># go through all measurements:</span>
-<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurementDict</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">name</span>
     <span class="n">measurementData</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
         <span class="s1">&#39;measuring time min&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span>
@@ -593,9 +580,10 @@ s6: initial concentration = 0.0 mole / l ; number of replicates = 0
 
     <span class="c1"># get replicates with time course data:</span>
     <span class="n">reactant</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s5&#39;</span><span class="p">)</span>
-    <span class="n">replicates</span> <span class="o">=</span> <span class="n">reactant</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">replicates</span><span class="p">:</span>
-        <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replicate</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    
+    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">reactant</span><span class="o">.</span><span class="n">replicates</span><span class="p">:</span>
+        <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replicate</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        
     <span class="n">experimentalData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -609,9 +597,10 @@ s6: initial concentration = 0.0 mole / l ; number of replicates = 0
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for time-course visualisation</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#a6cee3&#39;</span><span class="p">,</span><span class="s1">&#39;#1f78b4&#39;</span><span class="p">,</span><span class="s1">&#39;#b2df8a&#39;</span><span class="p">,</span><span class="s1">&#39;#33a02c&#39;</span><span class="p">,</span><span class="s1">&#39;#fb9a99&#39;</span><span class="p">,</span><span class="s1">&#39;#fdbf6f&#39;</span><span class="p">,</span><span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span><span class="s1">&#39;#cab2d6&#39;</span><span class="p">,</span><span class="s1">&#39;#6a3d9a&#39;</span><span class="p">,</span><span class="s1">&#39;#ffff99&#39;</span><span class="p">,</span><span class="s1">&#39;#b15928&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#a6cee3&#39;</span><span class="p">,</span><span class="s1">&#39;#1f78b4&#39;</span><span class="p">,</span><span class="s1">&#39;#b2df8a&#39;</span><span class="p">,</span><span class="s1">&#39;#33a02c&#39;</span><span class="p">,</span><span class="s1">&#39;#fb9a99&#39;</span><span class="p">,</span><span class="s1">&#39;#fdbf6f&#39;</span><span class="p">,</span> \
+          <span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span><span class="s1">&#39;#cab2d6&#39;</span><span class="p">,</span><span class="s1">&#39;#6a3d9a&#39;</span><span class="p">,</span><span class="s1">&#39;#ffff99&#39;</span><span class="p">,</span><span class="s1">&#39;#b15928&#39;</span><span class="p">]</span>
 <span class="c1"># plot time course data with matplotlib</span>
-<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">experimentalData</span><span class="p">)):</span>

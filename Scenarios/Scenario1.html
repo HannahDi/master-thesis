@@ -364,12 +364,12 @@ For this short scenario no modelling is done.</p>
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p>First all necessary Python packages must be installed and imported.<br />
 If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
-If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.tools</span> <span class="kn">import</span> <span class="n">EnzymeMLReader</span>
+<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.core</span> <span class="kn">import</span> <span class="n">EnzymeMLDocument</span>
 </pre></div>
 </div>
 </div>
@@ -386,36 +386,25 @@ When running the next code cell the EnzymeML document is saved in the <code clas
 
 <span class="c1"># check for correct file path and file extension:</span>
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
-    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLReader</span><span class="p">()</span><span class="o">.</span><span class="n">readFromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">printDocument</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incorrect file path.&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Couldnt find file at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Units
-	ID: u0 	 Name: ml
-	ID: u1 	 Name: mmole / l
-	ID: u2 	 Name: mg / ml
-	ID: u3 	 Name: K
-	ID: u4 	 Name: s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sporing_Measurements
 &gt;&gt;&gt; Reactants
 	ID: s0 	 Name: Propanal
 	ID: s1 	 Name: Propioin
 &gt;&gt;&gt; Proteins
 	ID: p0 	 Name: Benzoin Aldolase
+&gt;&gt;&gt; Complexes
 &gt;&gt;&gt; Reactions
 	ID: r0 	 Name: Propioin synthesis
-&gt;&gt;&gt; Measurements
-
-ID   Species   Conc     Unit   
-===============================
-m0   p0        30     mg / ml  
-m0   s0        200    mmole / l
-m0   s1        0      mmole / l
-                               
 </pre></div>
 </div>
 </div>
@@ -425,30 +414,17 @@ The conducted experiments are saved as measurements. These measurements contain 
 In this case only 1 measurement was conducted and is examined in the next output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement and inspect the scheme</span>
 <span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
-<span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getSpeciesDict</span><span class="p">()</span>
-
-<span class="c1"># Access the measurement data per reactant/protein</span>
-<span class="k">for</span> <span class="n">speciesType</span><span class="p">,</span> <span class="n">speciesDict</span> <span class="ow">in</span> <span class="n">measurementDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="c1"># Extract all the data</span>
-    <span class="k">for</span> <span class="n">speciesID</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">speciesDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">initConc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getInitConc</span><span class="p">()</span>
-        <span class="n">unitID</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getUnit</span><span class="p">()</span>
-        <span class="n">unitString</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getUnitString</span><span class="p">(</span><span class="n">unitID</span><span class="p">)</span>
-        <span class="n">replicates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">getReplicates</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">speciesID</span><span class="si">}</span><span class="s2">: initial concentration = </span><span class="si">{</span><span class="n">initConc</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unitString</span><span class="si">}</span><span class="s2"> ; number of replicates = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">replicates</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
+<span class="n">measurement</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propioin synthesis 1
-p0: initial concentration = 30.0 mg / ml ; number of replicates = 0
-s0: initial concentration = 200.0 mmole / l ; number of replicates = 3
-s1: initial concentration = 0.0 mmole / l ; number of replicates = 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Measurement m0: Propioin synthesis 1
+    s0 | initial conc: 200.0 mmole / l 	| #replicates: 3
+    s1 | initial conc: 0.0 mmole / l 	| #replicates: 0
+    p0 | initial conc: 30.0 mg / ml 	| #replicates: 0
 </pre></div>
 </div>
 </div>
@@ -461,7 +437,7 @@ s1: initial concentration = 0.0 mmole / l ; number of replicates = 0
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get reaction name for the title of the visualisation</span>
-<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
 
 <span class="c1"># get time-course data and prepare it for visualisation</span>
 <span class="n">measurementDict</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">exportData</span><span class="p">()</span>
@@ -490,12 +466,12 @@ s1: initial concentration = 0.0 mmole / l ; number of replicates = 0
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>prod1_repl1/s0/u1</th>
-      <th>prod1_repl2/s0/u1</th>
-      <th>prod1_repl3/s0/u1</th>
+      <th>prod1_repl1/s0/mmole / l</th>
+      <th>prod1_repl2/s0/mmole / l</th>
+      <th>prod1_repl3/s0/mmole / l</th>
     </tr>
     <tr>
-      <th>time/u4</th>
+      <th>time/min</th>
       <th></th>
       <th></th>
       <th></th>
@@ -547,7 +523,7 @@ In order to save the figure as svg uncomment the <code class="docutils literal n
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_course_data</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">reaction_name</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [min]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;time [</span><span class="si">{</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">global_time_unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration [mM]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="c1"># save as svg</span>
