@@ -12,6 +12,7 @@ chapters:
     sections:
     - file: Scenarios/Scenario1
     - file: Scenarios/Scenario2
+    - file: Scenarios/Scenario3
   - file: discussion
   - file: conclusion
   - file: references
