@@ -1,0 +1,1226 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenario 3: Initial rate analysis with and without Tween &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discussion" href="../discussion.html" />
+    <link rel="prev" title="Scenario 2: Measuring the stability of enzymes" href="Scenario2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/EnzML-favicon-32x32.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of Originality
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../scenarios.html">
+   Scenarios
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario1.html">
+     Scenario 1: Collecting data by BioCatHub and visualisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario2.html">
+     Scenario 2: Measuring the stability of enzymes
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Scenario 3: Initial rate analysis with and without Tween
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Scenarios/Scenario3.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/HannahDi/master-thesis"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/HannahDi/master-thesis/master?urlpath=tree/book/Scenarios/Scenario3.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Scenario 3: Initial rate analysis with and without Tween
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
+     Reading EnzymeML with PyEnzyme software
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data preparation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+     Visualisation of time-course data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-of-initial-rates">
+   Computation of initial rates
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plots-of-initial-rates-over-abts-concentrations">
+     Plots of initial rates over ABTS concentrations.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modelling-and-parameter-estimation">
+   Modelling and parameter estimation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results-for-measurements-without-tween">
+     Results for measurements without Tween
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results-for-measurements-with-tween">
+     Results for measurements with Tween
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lineweaver-burk">
+     Lineweaver-Burk
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-substrate-dependent-enzyme-inhibition-version-1">
+     With substrate dependent enzyme inhibition (Version 1)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-substrate-dependent-enzyme-inhibition-version-2">
+     With substrate dependent enzyme inhibition (Version 2)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario 3: Initial rate analysis with and without Tween</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Scenario 3: Initial rate analysis with and without Tween
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
+     Reading EnzymeML with PyEnzyme software
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data preparation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+     Visualisation of time-course data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computation-of-initial-rates">
+   Computation of initial rates
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plots-of-initial-rates-over-abts-concentrations">
+     Plots of initial rates over ABTS concentrations.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modelling-and-parameter-estimation">
+   Modelling and parameter estimation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results-for-measurements-without-tween">
+     Results for measurements without Tween
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results-for-measurements-with-tween">
+     Results for measurements with Tween
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lineweaver-burk">
+     Lineweaver-Burk
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-substrate-dependent-enzyme-inhibition-version-1">
+     With substrate dependent enzyme inhibition (Version 1)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-substrate-dependent-enzyme-inhibition-version-2">
+     With substrate dependent enzyme inhibition (Version 2)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="scenario-3-initial-rate-analysis-with-and-without-tween">
+<h1>Scenario 3: Initial rate analysis with and without Tween<a class="headerlink" href="#scenario-3-initial-rate-analysis-with-and-without-tween" title="Permalink to this headline">¶</a></h1>
+<p>Dataset provided by Alexander Behr, Julia Grühn and Katrin Rosenthal (Department of Biochemical and ChemicalEngineering, TU Dortmund University, Dortmund, Germany)</p>
+<p>The aim of the initial rate analysis is to investigate the influence of Tween 80 on the oxidation of ABTS by Trametes versicolor laccase. The dataset contains measurements of the product concentration for different initial substrate concentrations, first with 1% Tween 80, then without Tween 80. The experiment was conducted in a straight tube reactor. In the course of the project experiments in a spiral tube reactor should be conducted, those will only contain two data points per measurement, one at the beginning and one at the end of the reactor. In the absence of time-course data only initial rate analysis can be performed. In preparation for this, only initial rate analysis is done in this scenario.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>First all necessary Python packages must be installed and imported.<br />
+This step is the same for all scenarios and differs only in the used python packages.
+If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
+If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">report_fit</span>
+
+<span class="kn">from</span> <span class="nn">pyenzyme</span> <span class="kn">import</span> <span class="n">EnzymeMLDocument</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-enzymeml-with-pyenzyme-software">
+<h2>Reading EnzymeML with PyEnzyme software<a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software" title="Permalink to this headline">¶</a></h2>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
+If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or to change the path accordingly.<br />
+When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Rosenthal_Measurements_orig.omex&#39;</span>
+
+<span class="c1"># check for correct file path and file extension:</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">printDocument</span><span class="p">(</span><span class="n">measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Couldnt find file at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laccase_STR_Kinetic
+&gt;&gt;&gt; Reactants
+	ID: s0 	 Name: ABTS reduced
+	ID: s1 	 Name: oxygen
+	ID: s2 	 Name: ABTS oxidized
+	ID: s3 	 Name: Tween 80
+&gt;&gt;&gt; Proteins
+	ID: p0 	 Name: Laccase
+&gt;&gt;&gt; Complexes
+&gt;&gt;&gt; Reactions
+	ID: r0 	 Name: ABTS oxidation
+&gt;&gt;&gt; Measurements
+
+ID    Species    Conc       Unit   
+===================================
+m0    p0        3.525     umole / l
+m0    s0        36.450    umole / l
+m0    s1        204       umole / l
+m0    s2        0         umole / l
+m0    s3        8.090     mmole / l
+m1    p0        3.525     umole / l
+m1    s0        91.130    umole / l
+m1    s1        204       umole / l
+m1    s2        0         umole / l
+m1    s3        8.090     mmole / l
+m2    p0        3.525     umole / l
+m2    s0        182.260   umole / l
+m2    s1        204       umole / l
+m2    s2        0         umole / l
+m2    s3        8.090     mmole / l
+m3    p0        3.525     umole / l
+m3    s0        364.510   umole / l
+m3    s1        204       umole / l
+m3    s2        0         umole / l
+m3    s3        8.090     mmole / l
+m4    p0        3.525     umole / l
+m4    s0        729.020   umole / l
+m4    s1        204       umole / l
+m4    s2        0         umole / l
+m4    s3        8.090     mmole / l
+m5    p0        3.525     umole / l
+m5    s0        911.280   umole / l
+m5    s1        204       umole / l
+m5    s2        0         umole / l
+m5    s3        8.090     mmole / l
+m6    p0        3.525     umole / l
+m6    s0        36.450    umole / l
+m6    s1        204       umole / l
+m6    s2        0         umole / l
+m6    s3        0         mmole / l
+m7    p0        3.525     umole / l
+m7    s0        91.130    umole / l
+m7    s1        204       umole / l
+m7    s2        0         umole / l
+m7    s3        0         mmole / l
+m8    p0        3.525     umole / l
+m8    s0        182.260   umole / l
+m8    s1        204       umole / l
+m8    s2        0         umole / l
+m8    s3        0         mmole / l
+m9    p0        3.525     umole / l
+m9    s0        364.510   umole / l
+m9    s1        204       umole / l
+m9    s2        0         umole / l
+m9    s3        0         mmole / l
+m10   p0        3.525     umole / l
+m10   s0        729.020   umole / l
+m10   s1        204       umole / l
+m10   s2        0         umole / l
+m10   s3        0         mmole / l
+m11   p0        3.525     umole / l
+m11   s0        911.280   umole / l
+m11   s1        204       umole / l
+m11   s2        0         umole / l
+m11   s3        0         mmole / l
+                                   
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview showed which reactant corresponds to which ID.<br />
+Each measurement consists of 4 reactants and one protein (p0).
+From the measurement information we can derive that the concentration of ABTS reduced (s0) and Tween 80 (s3) was varied.<br />
+All concentrations, except for Tween, were given in the same units, therefore they don’t have to be converted later on.<br />
+Next one measurement is exemplarily examined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement and inspect the scheme</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="n">measurement</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Measurement m0: ABTS (1%) 1
+    s0 | initial conc: 36.45 umole / l 	| #replicates: 0
+    s1 | initial conc: 204.0 umole / l 	| #replicates: 0
+    s2 | initial conc: 0.0 umole / l 	| #replicates: 2
+    s3 | initial conc: 8.09 mmole / l 	| #replicates: 0
+    p0 | initial conc: 3.525 umole / l 	| #replicates: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The measurement shows that only the product ABTS oxidized (s2) was measured.<br />
+In this case, the two replicates per measurement correspond to one absorbance and one concentration measurement.</p>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>In order to visualise and model the data, it first has to be extracted and prepared.<br />
+All relevant data such as the initial concentrations and time-course data are extracted and saved for each measurement in a dictionary.<br />
+The outer data-structure <code class="docutils literal notranslate"><span class="pre">dataDict</span></code> is a dictionary to distinguish between measurements with and without Tween 80.<br />
+For convenient visualisation a second dictionary <code class="docutils literal notranslate"><span class="pre">visualisationData</span></code> contains only the time-course data.<br />
+Since the absorbance has already been converted to concentration, only the concentration time-course data is extracted and modelled, for an easier comparison of the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#initialise data-structure to store experimental data</span>
+<span class="n">dataDict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tween&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;noTween&#39;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+<span class="n">visualisationData</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tween&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;noTween&#39;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+<span class="c1"># time and units</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">global_time</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">timeUnit</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">global_time_unit</span>
+<span class="n">concentrationUnit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="c1"># go through all measurements:</span>
+<span class="k">for</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">measurementData</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;p0&#39;</span><span class="p">:</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getProtein</span><span class="p">(</span><span class="s1">&#39;p0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">,</span>
+        <span class="s1">&#39;s0&#39;</span><span class="p">:</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">,</span>
+        <span class="s1">&#39;s1&#39;</span><span class="p">:</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">,</span>
+        <span class="s1">&#39;s2&#39;</span><span class="p">:</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">,</span>
+        <span class="s1">&#39;s3&#39;</span><span class="p">:</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">,</span>
+        <span class="s1">&#39;measured&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># get replicates with time course data:</span>
+    <span class="n">reactant</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s2&#39;</span><span class="p">)</span>
+    <span class="n">concentrationUnit</span> <span class="o">=</span> <span class="n">reactant</span><span class="o">.</span><span class="n">unit</span>
+    
+    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">reactant</span><span class="o">.</span><span class="n">replicates</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">replicate</span><span class="o">.</span><span class="n">data_type</span> <span class="o">==</span> <span class="s1">&#39;conc&#39;</span><span class="p">:</span>
+            <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replicate</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="c1"># distinguish between measurements with and without tween</span>
+    <span class="k">if</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">)</span>
+        <span class="n">visualisationData</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">)</span>
+        <span class="n">visualisationData</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualisation-of-time-course-data">
+<h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
+<p>All time-course data extracted from the measurements is visualised with the Python library matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for all visualisations</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#f781bf&#39;</span><span class="p">,</span><span class="s1">&#39;#984ea3&#39;</span><span class="p">,</span><span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span><span class="s1">&#39;#ffff33&#39;</span><span class="p">,</span><span class="s1">&#39;#a65628&#39;</span><span class="p">,</span><span class="s1">&#39;#4daf4a&#39;</span><span class="p">]</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+<span class="c1"># plot time course data with matplotlib</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Measurement &#39;</span><span class="o">+</span><span class="n">reaction_name</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">visualisationData</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">])):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">visualisationData</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;time [&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">visualisationData</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;time [&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_11_0.png" src="../_images/Scenario3_11_0.png" />
+</div>
+</div>
+<p>The visualisation shows that the time-course data for the product does not start at 0, as it is stated in the EnzymeML document in the initial concentration field. This indicates that either the measurement did not start immediately and a part of the substrate was already converted, or only the linear part was transferred from the original data into the EnzymeML document.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="computation-of-initial-rates">
+<h1>Computation of initial rates<a class="headerlink" href="#computation-of-initial-rates" title="Permalink to this headline">¶</a></h1>
+<p>Initial rates for the different substrate concentrations are calculated with linear regression by the Python library SciPy and added to the <code class="docutils literal notranslate"><span class="pre">allData</span></code> dictionary.<br />
+Simultaneously the curves from the linear regression are plotted together with the measurements to get a visual impression of the goodness of the fit.<br />
+Here the regression was done over the whole time-course including all available data-points. Alternatively only a part could have been defined for the linear regression as was done in <a class="reference internal" href="Scenario2.html"><span class="doc">Scenario 2: Measuring the stability of enzymes</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function returning a curve with the initial rate as the slope for visualisation</span>
+<span class="k">def</span> <span class="nf">initialRateCurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>
+    <span class="n">curve</span> <span class="o">=</span> <span class="n">slope</span><span class="o">*</span><span class="n">time</span><span class="o">+</span><span class="n">intercept</span>
+    <span class="k">return</span> <span class="n">curve</span>
+
+<span class="c1"># Visualisation</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Measurement &#39;</span><span class="o">+</span><span class="n">reaction_name</span><span class="o">+</span><span class="s1">&#39; with initial rate curves&#39;</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="c1"># computation of initial rates with linear regression</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slope</span>
+    <span class="c1"># visualisation of time-course data and initial rate curves</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">initialRateCurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;time [&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="c1"># computation of initial rates with linear regression</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slope</span>
+    <span class="c1"># visualisation of time-course data and initial rate curves</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">initialRateCurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;time [&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;time-course_with_slope.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_14_0.png" src="../_images/Scenario3_14_0.png" />
+</div>
+</div>
+<div class="section" id="plots-of-initial-rates-over-abts-concentrations">
+<h2>Plots of initial rates over ABTS concentrations.<a class="headerlink" href="#plots-of-initial-rates-over-abts-concentrations" title="Permalink to this headline">¶</a></h2>
+<p>For the modelling in the next step an additional data point for the substrate concentration of 0 is added. This can help with better results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurementData</span> <span class="o">=</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">measurementDataNew</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;p0&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s0&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;s1&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s1&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s2&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s2&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s3&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s3&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;measured&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+<span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">measurementDataNew</span><span class="p">)</span>
+<span class="n">measurementData</span> <span class="o">=</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">measurementDataNew</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;p0&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s0&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;s1&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s1&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s2&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s2&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;s3&#39;</span><span class="p">:</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s3&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;measured&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+<span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">measurementDataNew</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;initial rates &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span><span class="s1">&#39;initial rate [ &#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;* 1/&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;initial-rates.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_17_0.png" src="../_images/Scenario3_17_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="modelling-and-parameter-estimation">
+<h1>Modelling and parameter estimation<a class="headerlink" href="#modelling-and-parameter-estimation" title="Permalink to this headline">¶</a></h1>
+<p>In order to model the data and perform parameter fitting, the rate equations for the models are defined as Python functions, along with a function to calculate the residual between the models and the previously computed initial rates.<br />
+In the following cell 3 different models are defined. First the irreversible Michaelis Menten kinetic. Then, two extensions of Michaelis Menten with substrate inhibition.<br />
+All models can be fitted either with v_max as a parameter or k_cat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">irreversibleMichaelisMenten</span><span class="p">(</span><span class="n">kineticVariables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Rate equation according to Michaelis Menten, with the Michaelis Menten constant K_M and k_cat as as parameters</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        kineticVariables: vector of variables: kineticVariables = [s0, p0]</span>
+<span class="sd">        parameters: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># ABTS:</span>
+    <span class="n">s0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Enzyme:</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">#k_cat = parameters[&#39;k_cat&#39;].value</span>
+    <span class="n">v_max</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;v_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="c1">#v = k_cat*p0*s0/(K_M+s0)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">*</span><span class="n">s0</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span><span class="o">+</span><span class="n">s0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">michaelisMentenWithSubstrateInhibition</span><span class="p">(</span><span class="n">kineticVariables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Rate equation extending Michaelis Menten, with substrate inhibition introducing an additional inhibition parameter K_i</span>
+<span class="sd">    From https://www.sciencesnail.com/science/a-generalized-model-for-enzymatic-substrate equation with K_M^app</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        kineticVariables: vector of variables: kineticVariables = [s0, p0]</span>
+<span class="sd">        parameters: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># ABTS:</span>
+    <span class="n">s0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Enzyme:</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">#k_cat = parameters[&#39;k_cat&#39;].value</span>
+    <span class="n">v_max</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;v_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_i</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;K_i&#39;</span><span class="p">]</span>
+
+    <span class="c1">#v = k_cat*p0*s0/(K_M*(1+s0/K_i)+s0)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">*</span><span class="n">s0</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">s0</span><span class="o">/</span><span class="n">K_i</span><span class="p">)</span><span class="o">+</span><span class="n">s0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">michaelisMentenWithSubstrateInhibitionV2</span><span class="p">(</span><span class="n">kineticVariables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Rate equation extending Michaelis Menten, with substrate inhibition introducing an additional inhibition parameter K_i</span>
+<span class="sd">    From https://www.sciencesnail.com/science/a-generalized-model-for-enzymatic-substrate equation with V_max^app</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        kineticVariables: vector of variables: kineticVariables = [s0, p0]</span>
+<span class="sd">        parameters: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># ABTS:</span>
+    <span class="n">s0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Enzyme:</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">kineticVariables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">#k_cat = parameters[&#39;k_cat&#39;].value</span>
+    <span class="n">v_max</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;v_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_i</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;K_i&#39;</span><span class="p">]</span>
+
+    <span class="c1">#v = k_cat*p0*s0/((K_M+s0)*(1+s0/K_i))</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">*</span><span class="n">s0</span><span class="o">/</span><span class="p">((</span><span class="n">K_M</span><span class="o">+</span><span class="n">s0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">s0</span><span class="o">/</span><span class="n">K_i</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">tween</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kineticEquation</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Residual function to compute difference between the model, defined in the kineticEquation and the computed initial rates.</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        parameters: parameters object from lmfit</span>
+<span class="sd">        tween: key to select data with or without Tween 80</span>
+<span class="sd">        kineticEquation: function defining the kinetc model</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">measurementsData</span> <span class="o">=</span> <span class="n">dataDict</span><span class="p">[</span><span class="n">tween</span><span class="p">]</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">measurementsData</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurementsData</span><span class="p">)):</span>
+        <span class="n">measurementData</span> <span class="o">=</span> <span class="n">measurementsData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">v_modeled</span> <span class="o">=</span> <span class="n">kineticEquation</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="n">residual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">v_modeled</span>
+    <span class="k">return</span> <span class="n">residual</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each modelling step the a parameters object from the Python library lmfit is initialised.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="c1">#params.add(&#39;k_cat&#39;, value=0.6, min=0.0001, max=1000)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;v_max&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">resultsMichaelisMentenNoTween</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;noTween&#39;</span><span class="p">,</span> <span class="n">irreversibleMichaelisMenten</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">resultsMichaelisMentenTween</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;tween&#39;</span><span class="p">,</span> <span class="n">irreversibleMichaelisMenten</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;irrev. Michaelis Menten kinetic &#39;</span><span class="p">)</span>
+<span class="n">sNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irreversibleMichaelisMenten</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsMichaelisMentenNoTween</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span><span class="s1">&#39;initial rate [ 1/&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irreversibleMichaelisMenten</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsMichaelisMentenTween</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sNoTween</span><span class="p">,</span> <span class="n">vNoTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sTween</span><span class="p">,</span> <span class="n">vTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;initial-rates_irrev_Michaelis_Menten.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_23_0.png" src="../_images/Scenario3_23_0.png" />
+</div>
+</div>
+<div class="section" id="results-for-measurements-without-tween">
+<h2>Results for measurements without Tween<a class="headerlink" href="#results-for-measurements-without-tween" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsMichaelisMentenNoTween</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>16</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>2</td><td></td></tr><tr><td>chi-square</td><td> 0.00188835</td><td></td></tr><tr><td>reduced chi-square</td><td> 3.7767e-04</td><td></td></tr><tr><td>Akaike info crit.</td><td>-53.5257279</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-53.6339076</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.18850416 </td><td>  0.01613198 </td><td> (8.56%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  60.0378698 </td><td>  23.4308038 </td><td> (39.03%) </td><td> 100 </td><td>  1.0000e-04 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>0.7684</td></tr></table></div></div>
+</div>
+</div>
+<div class="section" id="results-for-measurements-with-tween">
+<h2>Results for measurements with Tween<a class="headerlink" href="#results-for-measurements-with-tween" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsMichaelisMentenTween</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>16</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>2</td><td></td></tr><tr><td>chi-square</td><td> 5.3985e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 1.0797e-04</td><td></td></tr><tr><td>Akaike info crit.</td><td>-62.2909156</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-62.3990953</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.20229660 </td><td>  0.01684044 </td><td> (8.32%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  219.502108 </td><td>  53.0418147 </td><td> (24.16%) </td><td> 100 </td><td>  1.0000e-04 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>0.8966</td></tr></table></div></div>
+</div>
+</div>
+<div class="section" id="lineweaver-burk">
+<h2>Lineweaver-Burk<a class="headerlink" href="#lineweaver-burk" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the parameter fitting with lmfit, a simple analysis with Lineweaver-Burk is done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lineweaver-Burk</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">])</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">pass</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">v_max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">intercept</span>
+<span class="n">K_M</span> <span class="o">=</span> <span class="n">slope</span><span class="o">*</span><span class="n">v_max</span>
+<span class="n">k_cat</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">/</span><span class="n">p0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;without Tween&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;K_M: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">K_M</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v_max: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v_max</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;k_cat: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k_cat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>without Tween
+K_M: 81.55025342462156
+v_max: 0.2002360858487077
+k_cat: 0.05680456336133552
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lineweaver-Burk</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">])</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">pass</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">v_max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">intercept</span>
+<span class="n">K_M</span> <span class="o">=</span> <span class="n">slope</span><span class="o">*</span><span class="n">v_max</span>
+<span class="n">k_cat</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">/</span><span class="n">p0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;with Tween&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;K_M: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">K_M</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v_max: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v_max</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;k_cat: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k_cat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>with Tween
+K_M: 196.1327972718782
+v_max: 0.18253819241592006
+k_cat: 0.051783884373310655
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="with-substrate-dependent-enzyme-inhibition-version-1">
+<h2>With substrate dependent enzyme inhibition (Version 1)<a class="headerlink" href="#with-substrate-dependent-enzyme-inhibition-version-1" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="c1">#params.add(&#39;k_cat&#39;, value=0.06, min=0.000001, max=1000)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;v_max&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">resultsSubstrateInhibitionNoTween</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;noTween&#39;</span><span class="p">,</span> <span class="n">michaelisMentenWithSubstrateInhibition</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">resultsSubstrateInhibitionTween</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;tween&#39;</span><span class="p">,</span> <span class="n">michaelisMentenWithSubstrateInhibition</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;irrev. MM kinetic with inhibition V1&#39;</span><span class="p">)</span>
+<span class="n">sNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">michaelisMentenWithSubstrateInhibition</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsSubstrateInhibitionNoTween</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span><span class="s1">&#39;initial rate [ 1/&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">michaelisMentenWithSubstrateInhibition</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsSubstrateInhibitionTween</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sNoTween</span><span class="p">,</span> <span class="n">vNoTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sTween</span><span class="p">,</span> <span class="n">vTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;initial-rates_irrev_Michaelis_Menten_inhibitionV1.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_33_0.png" src="../_images/Scenario3_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report_fit</span><span class="p">(</span><span class="n">resultsSubstrateInhibitionNoTween</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 29
+    # data points      = 7
+    # variables        = 3
+    chi-square         = 0.00188835
+    reduced chi-square = 4.7209e-04
+    Akaike info crit   = -51.5257279
+    Bayesian info crit = -51.6879975
+##  Warning: uncertainties could not be estimated:
+[[Variables]]
+    v_max:  0.23998253 +/-        nan (nan%) (init = 0.6)
+    K_M:    76.4352495 +/-        nan (nan%) (init = 80)
+    K_i:    279.895535 +/-        nan (nan%) (init = 160)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsSubstrateInhibitionTween</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>45</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>3</td><td></td></tr><tr><td>chi-square</td><td> 5.3985e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 1.3496e-04</td><td></td></tr><tr><td>Akaike info crit.</td><td>-60.2909156</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-60.4531851</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.20683890 </td><td>  72059.3775 </td><td> (34838407.05%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  224.431814 </td><td>  78188424.5 </td><td> (34838387.24%) </td><td> 80 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr><tr><td> K_i </td><td>  9995.10984 </td><td>  1.5507e+11 </td><td> (1551494847.26%) </td><td> 160 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_i</td><td>-1.0000</td></tr><tr><td>v_max</td><td>K_M</td><td>1.0000</td></tr><tr><td>K_M</td><td>K_i</td><td>-1.0000</td></tr></table></div></div>
+</div>
+</div>
+<div class="section" id="with-substrate-dependent-enzyme-inhibition-version-2">
+<h2>With substrate dependent enzyme inhibition (Version 2)<a class="headerlink" href="#with-substrate-dependent-enzyme-inhibition-version-2" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="c1">#params.add(&#39;k_cat&#39;, value=0.06, min=0.000001, max=1000)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;v_max&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">resultsSubstrateInhibitionNoTweenV2</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;noTween&#39;</span><span class="p">,</span> <span class="n">michaelisMentenWithSubstrateInhibitionV2</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">resultsSubstrateInhibitionTweenV2</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;tween&#39;</span><span class="p">,</span> <span class="n">michaelisMentenWithSubstrateInhibitionV2</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;irrev. MM kinetic with inhibition V2&#39;</span><span class="p">)</span>
+<span class="n">sNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vNoTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vTween</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;noTween&#39;</span><span class="p">]:</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vNoTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">michaelisMentenWithSubstrateInhibitionV2</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsSubstrateInhibitionNoTweenV2</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;without Tween 80&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span><span class="s1">&#39;initial rate [ 1/&#39;</span><span class="o">+</span><span class="n">timeUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">measurementData</span> <span class="ow">in</span> <span class="n">dataDict</span><span class="p">[</span><span class="s1">&#39;tween&#39;</span><span class="p">]:</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span> <span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">)</span>
+    <span class="n">sTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">])</span>
+    <span class="n">vTween</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">michaelisMentenWithSubstrateInhibitionV2</span><span class="p">([</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;s0&#39;</span><span class="p">],</span><span class="n">measurementData</span><span class="p">[</span><span class="s1">&#39;p0&#39;</span><span class="p">]],</span> <span class="n">resultsSubstrateInhibitionTweenV2</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;with Tween 80&#39;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;ABTS concentration [&#39;</span><span class="o">+</span><span class="n">concentrationUnit</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sNoTween</span><span class="p">,</span> <span class="n">vNoTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sTween</span><span class="p">,</span> <span class="n">vTween</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;initial-rates_irrev_Michaelis_Menten_inhibitionV2.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario3_38_0.png" src="../_images/Scenario3_38_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsSubstrateInhibitionNoTweenV2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>59</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>3</td><td></td></tr><tr><td>chi-square</td><td> 1.6757e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 4.1892e-05</td><td></td></tr><tr><td>Akaike info crit.</td><td>-68.4802620</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-68.6425315</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.73793858 </td><td>  3751.45850 </td><td> (508370.02%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  403.729434 </td><td>  2052481.20 </td><td> (508380.37%) </td><td> 80 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr><tr><td> K_i </td><td>  403.779136 </td><td>  2052761.60 </td><td> (508387.24%) </td><td> 160 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>1.0000</td></tr><tr><td>v_max</td><td>K_i</td><td>-1.0000</td></tr><tr><td>K_M</td><td>K_i</td><td>-1.0000</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsSubstrateInhibitionTweenV2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>59</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>3</td><td></td></tr><tr><td>chi-square</td><td> 2.1094e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 5.2735e-05</td><td></td></tr><tr><td>Akaike info crit.</td><td>-66.8688780</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-67.0311475</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.63003480 </td><td>  6550.46063 </td><td> (1039698.22%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  824.589609 </td><td>  8573114.67 </td><td> (1039682.60%) </td><td> 80 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr><tr><td> K_i </td><td>  824.458311 </td><td>  8571319.48 </td><td> (1039630.43%) </td><td> 160 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>1.0000</td></tr><tr><td>v_max</td><td>K_i</td><td>-1.0000</td></tr><tr><td>K_M</td><td>K_i</td><td>-1.0000</td></tr></table></div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Scenario2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Scenario 2: Measuring the stability of enzymes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../discussion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Discussion</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Hannah Dienhart<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
