@@ -834,12 +834,28 @@ The parameters are derived from curve-fitting, which is done by minimizing the l
 Lmfit provides a structured overview of the fit statistics such as used minimisation method and different quality criterion such as Akaike and Bayesian, together with statistics about the estimated parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultsMichaelisMentenNoTween</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report_fit</span><span class="p">(</span><span class="n">resultsMichaelisMentenNoTween</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>16</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>2</td><td></td></tr><tr><td>chi-square</td><td> 0.00188835</td><td></td></tr><tr><td>reduced chi-square</td><td> 3.7767e-04</td><td></td></tr><tr><td>Akaike info crit.</td><td>-53.5257279</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-53.6339076</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.18850416 </td><td>  0.01613198 </td><td> (8.56%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  60.0378698 </td><td>  23.4308038 </td><td> (39.03%) </td><td> 100 </td><td>  1.0000e-04 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>0.7684</td></tr></table></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 16
+    # data points      = 7
+    # variables        = 2
+    chi-square         = 0.00188835
+    reduced chi-square = 3.7767e-04
+    Akaike info crit   = -53.5257279
+    Bayesian info crit = -53.6339076
+[[Variables]]
+    v_max:  0.18850416 +/- 0.01613198 (8.56%) (init = 0.6)
+    K_M:    60.0378698 +/- 23.4308038 (39.03%) (init = 100)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(v_max, K_M) = 0.768
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Results for measurements with Tween</strong></p>
 <div class="cell docutils container">
