@@ -3,12 +3,10 @@
 
 format: jb-book
 root: welcome
-parts:
-- chapters:
+chapters:
   - file: declaration
   - file: abstract
   - file: acknowledgements
-  - file: toc-page
   - file: intro
   - file: scenarios
     sections:
