@@ -2,4 +2,5 @@
 
 # Appendix
 
-TODO (Scenario Malzacher)
+TODO (Scenario Malzacher ?)
+* Internet resources (website, GitHub), DOI (Zenodo, DaRUS)

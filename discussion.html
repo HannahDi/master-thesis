@@ -265,6 +265,21 @@
 <div class="tex2jax_ignore mathjax_ignore section" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h1>
 <p>TODO</p>
+<ul class="simple">
+<li><p>FAIR: Publication on GitHub, Zenodo, DaRUS</p></li>
+<li><p>Combination with other Modelling Tools, inside or outside of Jupyter Notebook, e.g. Copasi, PySCeS</p></li>
+<li><p>Most software is proprietary must be bought, is not always available -&gt; makes reproduction hard</p></li>
+<li><p>Often the software is a black box, users often don’t know underlying algorithm</p></li>
+<li><p>often more than one software needed for different steps -&gt; copy paste between these -&gt; error prone (eg Excel -&gt; Origin Pro -&gt; written paper)</p></li>
+<li><p>Information losses: initial rates (no information of curve),</p></li>
+<li><p>data can be scattered eg over several excel files</p></li>
+<li><p>Combination of code and explanatory text, given in Notebooks but not in Excel or other data-formats</p></li>
+<li><p>Problems with initial rates: no convention on which part of the time-course to take for calculation: - from beginning till arbitrary time (seconds or minutes later) vs - linear part of curve with sense of proportion again of arbitrary length</p></li>
+<li><p>even data formats like enzymeml can never be 100% complete for all scenarios: eg for now no information on modelling, no information on conversion from absorbance to concentration… these are all stored in Jupyter Notebook if this is used for these steps</p></li>
+<li><p>Problems that can’t be solved: if experimenter decides to no save all data, but just the nice experiments, but hope to give incentive to report all data especially raw data such es absorbance</p></li>
+<li><p>Problem with Jupyter Nb: git diff not working very well with the json schema and all the metadata, but in Jupyter Notebook classic environment already a git nbdiff button, shows diff with only changes inside the code cells</p></li>
+<li><p>more and more common to share JNbs especially with Colab (Johann and Frank did this to show how to run their modelling tools)</p></li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
