@@ -4,4 +4,5 @@ numpy==1.21.5
 scipy==1.7.3
 lmfit==1.0.3
 # install PyEnzyme from a commit to make sure this will always work
-git+https://github.com/EnzymeML/PyEnzyme.git@9454436d0d8c0abb4bd84b33c79bac84c4e0289f
+# git+https://github.com/EnzymeML/PyEnzyme.git@9454436d0d8c0abb4bd84b33c79bac84c4e0289f
+git+https://github.com/EnzymeML/PyEnzyme.git@Refactoring
