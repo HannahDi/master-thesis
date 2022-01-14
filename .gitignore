@@ -10,3 +10,6 @@ ipython_config.py
 
 # requirements preparation
 freeze.txt
+
+# VS Code
+.vscode/*
