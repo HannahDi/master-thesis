@@ -7,4 +7,4 @@ lmfit==1.0.3
 # git+https://github.com/EnzymeML/PyEnzyme.git@9454436d0d8c0abb4bd84b33c79bac84c4e0289f
 git+https://github.com/EnzymeML/PyEnzyme.git@Refactoring
 # jupyter notebook
-notebook-6.4.7
+notebook==6.4.7
