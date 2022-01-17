@@ -13,6 +13,7 @@ chapters:
     - file: Scenarios/Scenario1
     - file: Scenarios/Scenario2
     - file: Scenarios/Scenario3
+    - file: Scenarios/Scenario4
   - file: discussion
   - file: conclusion
   - file: references
