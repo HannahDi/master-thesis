@@ -599,7 +599,8 @@ Since the absorbance has already been converted to concentration, only the conce
 </div>
 <div class="section" id="visualisation-of-time-course-data">
 <h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
-<p>All time-course data extracted from the measurements is visualised with the Python library matplotlib.</p>
+<p>All time-course data extracted from the measurements is visualised with the Python library matplotlib.
+In order to save the figures as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for all visualisations</span>
@@ -865,7 +866,23 @@ Lmfit provides a structured overview of the fit statistics such as used minimisa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>16</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>2</td><td></td></tr><tr><td>chi-square</td><td> 5.3985e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 1.0797e-04</td><td></td></tr><tr><td>Akaike info crit.</td><td>-62.2909156</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-62.3990953</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.20229660 </td><td>  0.01684044 </td><td> (8.32%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  219.502108 </td><td>  53.0418147 </td><td> (24.16%) </td><td> 100 </td><td>  1.0000e-04 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>0.8966</td></tr></table></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 16
+    # data points      = 7
+    # variables        = 2
+    chi-square         = 5.3985e-04
+    reduced chi-square = 1.0797e-04
+    Akaike info crit   = -62.2909156
+    Bayesian info crit = -62.3990953
+[[Variables]]
+    v_max:  0.20229660 +/- 0.01684044 (8.32%) (init = 0.6)
+    K_M:    219.502108 +/- 53.0418147 (24.16%) (init = 100)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(v_max, K_M) = 0.897
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Visualisation of results</strong></p>
 <div class="cell docutils container">
@@ -954,7 +971,26 @@ In a meeting with Katrin Rosenthal the estimated K_M values from this Jupyter No
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>59</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>3</td><td></td></tr><tr><td>chi-square</td><td> 1.6757e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 4.1892e-05</td><td></td></tr><tr><td>Akaike info crit.</td><td>-68.4802620</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-68.6425315</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.73793858 </td><td>  3751.45850 </td><td> (508370.02%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  403.729434 </td><td>  2052481.20 </td><td> (508380.37%) </td><td> 80 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr><tr><td> K_i </td><td>  403.779136 </td><td>  2052761.60 </td><td> (508387.24%) </td><td> 160 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>1.0000</td></tr><tr><td>v_max</td><td>K_i</td><td>-1.0000</td></tr><tr><td>K_M</td><td>K_i</td><td>-1.0000</td></tr></table></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 59
+    # data points      = 7
+    # variables        = 3
+    chi-square         = 1.6757e-04
+    reduced chi-square = 4.1892e-05
+    Akaike info crit   = -68.4802620
+    Bayesian info crit = -68.6425315
+[[Variables]]
+    v_max:  0.73793858 +/- 3751.45850 (508370.02%) (init = 0.6)
+    K_M:    403.729434 +/- 2052481.20 (508380.37%) (init = 80)
+    K_i:    403.779136 +/- 2052761.60 (508387.24%) (init = 160)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(v_max, K_M) = 1.000
+    C(v_max, K_i) = -1.000
+    C(K_M, K_i)   = -1.000
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Results for measurements with Tween</strong></p>
 <div class="cell docutils container">
@@ -964,7 +1000,26 @@ In a meeting with Katrin Rosenthal the estimated K_M values from this Jupyter No
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><h2>Fit Statistics</h2><table><tr><td>fitting method</td><td>leastsq</td><td></td></tr><tr><td># function evals</td><td>59</td><td></td></tr><tr><td># data points</td><td>7</td><td></td></tr><tr><td># variables</td><td>3</td><td></td></tr><tr><td>chi-square</td><td> 2.1094e-04</td><td></td></tr><tr><td>reduced chi-square</td><td> 5.2735e-05</td><td></td></tr><tr><td>Akaike info crit.</td><td>-66.8688780</td><td></td></tr><tr><td>Bayesian info crit.</td><td>-67.0311475</td><td></td></tr></table><h2>Variables</h2><table><tr><th> name </th><th> value </th><th> standard error </th><th> relative error </th><th> initial value </th><th> min </th><th> max </th><th> vary </th></tr><tr><td> v_max </td><td>  0.63003480 </td><td>  6550.46063 </td><td> (1039698.22%) </td><td> 0.6 </td><td>  1.0000e-04 </td><td>  1000.00000 </td><td> True </td></tr><tr><td> K_M </td><td>  824.589609 </td><td>  8573114.67 </td><td> (1039682.60%) </td><td> 80 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr><tr><td> K_i </td><td>  824.458311 </td><td>  8571319.48 </td><td> (1039630.43%) </td><td> 160 </td><td>  1.0000e-06 </td><td>  10000.0000 </td><td> True </td></tr></table><h2>Correlations (unreported correlations are < 0.100)</h2><table><tr><td>v_max</td><td>K_M</td><td>1.0000</td></tr><tr><td>v_max</td><td>K_i</td><td>-1.0000</td></tr><tr><td>K_M</td><td>K_i</td><td>-1.0000</td></tr></table></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 59
+    # data points      = 7
+    # variables        = 3
+    chi-square         = 2.1094e-04
+    reduced chi-square = 5.2735e-05
+    Akaike info crit   = -66.8688780
+    Bayesian info crit = -67.0311475
+[[Variables]]
+    v_max:  0.63003480 +/- 6550.46063 (1039698.22%) (init = 0.6)
+    K_M:    824.589609 +/- 8573114.67 (1039682.60%) (init = 80)
+    K_i:    824.458311 +/- 8571319.48 (1039630.43%) (init = 160)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(v_max, K_M) = 1.000
+    C(v_max, K_i) = -1.000
+    C(K_M, K_i)   = -1.000
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Visualisation of results</strong></p>
 <div class="cell docutils container">

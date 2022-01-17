@@ -1,0 +1,1503 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenario 4: Insight into mechanism by modelling &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/EnzML-favicon-32x32.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of Originality
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../scenarios.html">
+   Scenarios
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario1.html">
+     Scenario 1: Collecting data by BioCatHub and visualisation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario2.html">
+     Scenario 2: Measuring the stability of enzymes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Scenario3.html">
+     Scenario 3: Initial rate analysis with and without Tween
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Scenarios/Scenario4.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/HannahDi/master-thesis"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/HannahDi/master-thesis/master?urlpath=tree/book/Scenarios/Scenario4.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+   Reading EnzymeML with PyEnzyme software
+   <a class="anchor" name="ReadingEnzymeML">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation-a-class-anchor-name-datapreparation-a">
+   Data preparation
+   <a class="anchor" name="DataPreparation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+   Visualisation of time-course data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinetic-modelling-and-parameter-estimation">
+   Kinetic modelling and parameter estimation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialising-parameters">
+     Initialising parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-1-parameter-fitting-and-results-a-class-anchor-name-model1-a">
+     Model 1: Parameter fitting and results
+     <a class="anchor" name="Model1">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-2-parameter-fitting-and-results-a-class-anchor-name-model2-a">
+     Model 2: Parameter fitting and results
+     <a class="anchor" name="Model2">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-3-parameter-fitting-and-results-a-class-anchor-name-model3-a">
+     Model 3: Parameter fitting and results
+     <a class="anchor" name="Model3">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-4-parameter-fitting-and-results-a-class-anchor-name-model4-a">
+     Model 4: Parameter fitting and results
+     <a class="anchor" name="Model4">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-5-parameter-fitting-and-results-a-class-anchor-name-model5-a">
+     Model 5: Parameter fitting and results
+     <a class="anchor" name="Model5">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-6-parameter-fitting-and-results-a-class-anchor-name-model6-a">
+     Model 6: Parameter fitting and results
+     <a class="anchor" name="Model6">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#table-with-estimated-parameters-for-all-models-a-class-anchor-name-tablemodels-a">
+     Table with estimated parameters for all models
+     <a class="anchor" name="TableModels">
+     </a>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-model-with-estimated-parameters-to-enzymeml-a-class-anchor-name-addmodel-a">
+   Add model with estimated parameters to EnzymeML
+   <a class="anchor" name="AddModel">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+   Upload to DaRUS
+   <a class="anchor" name="Upload">
+   </a>
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario 4: Insight into mechanism by modelling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+   Reading EnzymeML with PyEnzyme software
+   <a class="anchor" name="ReadingEnzymeML">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation-a-class-anchor-name-datapreparation-a">
+   Data preparation
+   <a class="anchor" name="DataPreparation">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualisation-of-time-course-data">
+   Visualisation of time-course data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinetic-modelling-and-parameter-estimation">
+   Kinetic modelling and parameter estimation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialising-parameters">
+     Initialising parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-1-parameter-fitting-and-results-a-class-anchor-name-model1-a">
+     Model 1: Parameter fitting and results
+     <a class="anchor" name="Model1">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-2-parameter-fitting-and-results-a-class-anchor-name-model2-a">
+     Model 2: Parameter fitting and results
+     <a class="anchor" name="Model2">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-3-parameter-fitting-and-results-a-class-anchor-name-model3-a">
+     Model 3: Parameter fitting and results
+     <a class="anchor" name="Model3">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-4-parameter-fitting-and-results-a-class-anchor-name-model4-a">
+     Model 4: Parameter fitting and results
+     <a class="anchor" name="Model4">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-5-parameter-fitting-and-results-a-class-anchor-name-model5-a">
+     Model 5: Parameter fitting and results
+     <a class="anchor" name="Model5">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-6-parameter-fitting-and-results-a-class-anchor-name-model6-a">
+     Model 6: Parameter fitting and results
+     <a class="anchor" name="Model6">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#table-with-estimated-parameters-for-all-models-a-class-anchor-name-tablemodels-a">
+     Table with estimated parameters for all models
+     <a class="anchor" name="TableModels">
+     </a>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-model-with-estimated-parameters-to-enzymeml-a-class-anchor-name-addmodel-a">
+   Add model with estimated parameters to EnzymeML
+   <a class="anchor" name="AddModel">
+   </a>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+   Upload to DaRUS
+   <a class="anchor" name="Upload">
+   </a>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="scenario-4-insight-into-mechanism-by-modelling">
+<h1>Scenario 4: Insight into mechanism by modelling<a class="headerlink" href="#scenario-4-insight-into-mechanism-by-modelling" title="Permalink to this headline">¶</a></h1>
+<p>Dataset provided by Sandile Ngubane (Department of Biotechnology and Food Technology, Durban University of Technology, Durban 4000, South Africa)</p>
+<p>In this scenario the oxidation of ABTS catalysed by Trametes pubescens laccase has been investigated. In contrast to the previous scenario, not only initial rates but the whole time-course data was modelled.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>First all necessary Python packages must be installed and imported.<br />
+This step is the same for all scenarios and differs only in the used python packages.
+If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
+If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">report_fit</span>
+
+<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.core</span> <span class="kn">import</span> <span class="n">EnzymeMLDocument</span><span class="p">,</span> <span class="n">Protein</span><span class="p">,</span> <span class="n">EnzymeReaction</span>
+<span class="kn">from</span> <span class="nn">pyenzyme.enzymeml.models</span> <span class="kn">import</span> <span class="n">KineticModel</span><span class="p">,</span> <span class="n">KineticParameter</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+<h2>Reading EnzymeML with PyEnzyme software <a class="anchor" name="ReadingEnzymeML"></a><a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a" title="Permalink to this headline">¶</a></h2>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
+When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Ngubane_ABTS_Measurements_orig.omex&#39;</span>
+
+<span class="c1"># check for correct file path and file extension:</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.omex&#39;</span><span class="p">):</span>
+    <span class="n">enzmlDoc</span> <span class="o">=</span> <span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">printDocument</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Couldnt find file at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ABTS_Measurement
+&gt;&gt;&gt; Reactants
+	ID: s0 	 Name: 2,2&#39;-azino-bis(3-ethylbenzothiazoline-6-sulphonic acid)
+	ID: s1 	 Name: oxygen
+	ID: s2 	 Name: 2,2&#39;-azino-bis(3-ethylbenzothiazoline-6-sulphonic acid) radicals
+	ID: s3 	 Name: H2O
+&gt;&gt;&gt; Proteins
+	ID: p0 	 Name: laccase 2 (lap2)
+&gt;&gt;&gt; Complexes
+&gt;&gt;&gt; Reactions
+	ID: r0 	 Name: Oxidation
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview shows which reactant corresponds to which id.<br />
+Each measurement consists of 4 reactants (s0 - s3) and one protein (p0).<br />
+In this case all 9 measurements were carried out under identical conditions and with varying initial concentrations of the substrate (s0). All concentration units are identical so no conversion is needed later on.<br />
+Next, one measurement is exemplarily examined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="n">measurement</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Measurement m0: Oxidation 1
+    s0 | initial conc: 5.0 umole / l 	| #replicates: 3
+    s1 | initial conc: 0.0 umole / l 	| #replicates: 0
+    s2 | initial conc: 0.0 umole / l 	| #replicates: 0
+    s3 | initial conc: 0.0 umole / l 	| #replicates: 0
+    p0 | initial conc: 0.93 umole / l 	| #replicates: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The overview of the measurement shows that three replicates were measured for the substrate s0.</p>
+</div>
+<div class="section" id="data-preparation-a-class-anchor-name-datapreparation-a">
+<h2>Data preparation <a class="anchor" name="DataPreparation"></a><a class="headerlink" href="#data-preparation-a-class-anchor-name-datapreparation-a" title="Permalink to this headline">¶</a></h2>
+<p>In order to visualise and model the data, it first has to be extracted and prepared.<br />
+All relevant data such as the initial concentrations and time-course data are extracted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for time-course visualisation</span>
+<span class="n">colors9</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#252525&#39;</span><span class="p">,</span><span class="s1">&#39;#999999&#39;</span><span class="p">,</span><span class="s1">&#39;#f781bf&#39;</span><span class="p">,</span><span class="s1">&#39;#984ea3&#39;</span><span class="p">,</span><span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span><span class="s1">&#39;#ffff33&#39;</span><span class="p">,</span><span class="s1">&#39;#a65628&#39;</span><span class="p">,</span><span class="s1">&#39;#4daf4a&#39;</span><span class="p">,</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Substrate:</span>
+<span class="n">s0_init_conc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">measured_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Protein:</span>
+<span class="n">p0_init_conc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># time and units</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">global_time</span>
+<span class="n">time_unit</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">global_time_unit</span>
+<span class="n">conc_unit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># go through all measurements:</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+    
+    <span class="c1"># get replicates with time course data:</span>
+    <span class="n">reactant</span> <span class="o">=</span> <span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s0&#39;</span><span class="p">)</span>
+    <span class="n">conc_unit</span> <span class="o">=</span> <span class="n">reactant</span><span class="o">.</span><span class="n">unit</span>
+        
+    <span class="k">for</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="n">reactant</span><span class="o">.</span><span class="n">replicates</span><span class="p">:</span>
+        
+        <span class="c1"># Protein:</span>
+        <span class="n">p0_init_conc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">getProtein</span><span class="p">(</span><span class="s1">&#39;p0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">)</span>
+        
+        <span class="c1"># Substrate:</span>
+        <span class="n">s0_init_conc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s1">&#39;s0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">init_conc</span><span class="p">)</span>
+        <span class="n">measured_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replicate</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        
+        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">colors9</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">measured_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span>
+<span class="n">p0_init_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p0_init_conc</span><span class="p">)</span>
+<span class="n">s0_init_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s0_init_conc</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualisation-of-time-course-data">
+<h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
+<p>All time-course data is visualised with the Python library matplotlib.<br />
+In order to save the figures as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get reaction name for the title of the visualisation</span>
+<span class="n">reaction_name</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+<span class="c1"># plot time course data with matplotlib</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">reaction_name</span><span class="o">+</span><span class="s1">&#39; measurements&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;time&#39;</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">]&quot;</span>
+<span class="n">ylabel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;concentration&#39;</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">conc_unit</span><span class="si">}</span><span class="s2">]&quot;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1"># plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Scenario4_11_0.png" src="../_images/Scenario4_11_0.png" />
+</div>
+</div>
+<p>The visualisation shows the decrease of the substrate, ABTS unoxidised. After a standard course of the curves, which could correspond to Michaelis-Menten kinetics, the curves already flatten clearly above zero. This indicates that not all substrate was converted and the reactions my have stopped early.</p>
+</div>
+<div class="section" id="kinetic-modelling-and-parameter-estimation">
+<h2>Kinetic modelling and parameter estimation<a class="headerlink" href="#kinetic-modelling-and-parameter-estimation" title="Permalink to this headline">¶</a></h2>
+<p>In order to model the data and perform parameter fitting, the kinetic equations for the models are defined as Python functions, along with a function to calculate the residual between the models and the measured data.<br />
+In the following cell 3 different models are defined.<br />
+First the irreversible Michaelis-Menten kinetic.
+Then, an extension of Michaelis-Menten with time-dependent enzyme inactivation.
+And last a Michaelis-Menten kinetic with substrate-dependent enzyme inactivation.<br />
+Additional all kinetics contain a bias parameter, which will either be fixed to 0 or be an additional variable parameter for the model fitting.<br />
+The Michaelis-Menten equation is an ordinary differential equation (ODE) describing the change of the substrate concentration over time. It is dependent on the available amount of substrate and enzymes to convert the substrate. In order to model the enzyme inactivation, the enzyme concentration is not held constant, but its concentration change is also described by a second ODE. Resulting in a system of coupled ODEs.<br />
+The cell with the ODEs is followed by the code cell containing the computation of the residual between measured and modelled substrate concentration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">irreversible_Michaelis_Menten</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Differential equation of Michaelis-Menten model</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        w: vector of state variables: w = [c_S, c_E]</span>
+<span class="sd">        t: time</span>
+<span class="sd">        params: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">c_S</span><span class="p">,</span> <span class="n">c_E</span> <span class="o">=</span> <span class="n">w</span>
+    
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    
+    <span class="n">dc_S</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_cat</span><span class="o">*</span><span class="n">c_E</span><span class="o">*</span><span class="p">(</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span><span class="o">+</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span>
+    <span class="n">dc_E</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">dc_S</span><span class="p">,</span> <span class="n">dc_E</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">menten_with_enzyme_inactivation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Coupled differential equations</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        w: vector of state variables: w = [c_S, c_E]</span>
+<span class="sd">        t: time</span>
+<span class="sd">        params: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">c_S</span><span class="p">,</span> <span class="n">c_E</span> <span class="o">=</span> <span class="n">w</span>
+    
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">k_i</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_i&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    
+    <span class="n">dc_S</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_cat</span><span class="o">*</span><span class="n">c_E</span><span class="o">*</span><span class="p">(</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span><span class="o">+</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span>
+    <span class="n">dc_E</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_i</span><span class="o">*</span><span class="n">c_E</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">dc_S</span><span class="p">,</span> <span class="n">dc_E</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">menten_with_substrate_dependent_enzyme_inactivation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Coupled differential equations</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        w: vector of state variables: w = [c_S, c_E]</span>
+<span class="sd">        t: time</span>
+<span class="sd">        params: parameters object from lmfit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">c_S</span><span class="p">,</span> <span class="n">c_E</span> <span class="o">=</span> <span class="n">w</span>
+    
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">K_M</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">k_i</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_i&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    
+    <span class="n">dc_S</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_cat</span><span class="o">*</span><span class="n">c_E</span><span class="o">*</span><span class="p">(</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K_M</span><span class="o">+</span><span class="n">c_S</span><span class="o">-</span><span class="n">bias</span><span class="p">)</span>
+    <span class="n">dc_E</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_i</span><span class="o">*</span><span class="n">c_E</span><span class="o">*</span><span class="n">c_S</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">dc_S</span><span class="p">,</span> <span class="n">dc_E</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates residual between measured data and modelled data</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        params: parameters object from lmfit</span>
+<span class="sd">        t: time</span>
+<span class="sd">        data: measured data</span>
+<span class="sd">        w: vector of state variables [c_S, c_E]</span>
+<span class="sd">        f: ODEs</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+
+    <span class="n">ndata</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">data</span><span class="p">[:]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndata</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
+        <span class="n">s_model</span> <span class="o">=</span> <span class="n">model</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">residual</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">-</span><span class="n">s_model</span>
+    <span class="k">return</span> <span class="n">residual</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="initialising-parameters">
+<h3>Initialising parameters<a class="headerlink" href="#initialising-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The Python library lmfit provides a parameter object to initialise the parameters before the fit. Initial values for all parameters must be given. Therefore the steepest slop of the curves is calculated to initialise k_cat. As an initial K_M the highest initial substrate concentration is taken, assuming the measurements took place in the range of K_Ms magnitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slopes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">slopes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">slope</span><span class="p">))</span>
+<span class="n">v_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+<span class="n">c_E</span> <span class="o">=</span> <span class="n">p0_init_conc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">k_cat</span> <span class="o">=</span> <span class="n">v_max</span><span class="o">/</span><span class="n">c_E</span>
+<span class="n">K_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">s0_init_conc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters for irreversible Michaelis-Menten without bias</span>
+<span class="n">params_MM</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_MM</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">k_cat</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">params_MM</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">K_M</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_MM</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Parameters for Michaelis-Menten with bias</span>
+<span class="n">params_MM_with_bias</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_MM_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">k_cat</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">params_MM_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">K_M</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_MM_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters for Michaelis-Menten with time-dependent enzyme inactivation</span>
+<span class="n">params_time_dep_inactivation</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_time_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.00000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">))</span>
+<span class="n">params_time_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">k_cat</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_time_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">K_M</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_time_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Parameters for Michaelis-Menten with time-dependent enzyme inactivation and bias</span>
+<span class="n">params_time_dep_inactivation_with_bias</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.00000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">))</span>
+<span class="n">params_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">k_cat</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">K_M</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mf">0.00001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters for Michaelis-Menten with substrate-dependent enzyme inactivation</span>
+<span class="n">params_sub_dep_inactivation</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_sub_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.00000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">))</span>
+<span class="n">params_sub_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">k_cat</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_sub_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">K_M</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_sub_dep_inactivation</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Parameters for Michaelis-Menten with substrate-dependent enzyme inactivation and bias</span>
+<span class="n">params_sub_dep_inactivation_with_bias</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+<span class="n">params_sub_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_i&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.00000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">))</span>
+<span class="n">params_sub_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;k_cat&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_sub_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">params_sub_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fit for the last model would not yield any usable results for the tested initial parameter values, therefore these have been changed, by hand.</p>
+</div>
+<div class="section" id="model-1-parameter-fitting-and-results-a-class-anchor-name-model1-a">
+<h3>Model 1: Parameter fitting and results <a class="anchor" name="Model1"></a><a class="headerlink" href="#model-1-parameter-fitting-and-results-a-class-anchor-name-model1-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 1 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<p>The fitting procedure is always the same. The differential equations are integrated by the odeint function of  SciPy. Then lmfit performs a curve-fitting by minimizing the residual with the least squares error method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># model 1: irreversible Michaelis-Menten</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s0_init_conc</span><span class="p">,</span> <span class="n">p0_init_conc</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">s0_init_conc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">result_MM</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_MM</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">irreversible_Michaelis_Menten</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;irreversible Michaelis-Menten&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_MM</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_MM</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted1</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">irreversible_Michaelis_Menten</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;irreversible Michaelis-Menten&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model1.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 94
+    # data points      = 567
+    # variables        = 2
+    chi-square         = 19024.1974
+    reduced chi-square = 33.6711458
+    Akaike info crit   = 1995.93206
+    Bayesian info crit = 2004.61278
+[[Variables]]
+    k_cat:  37.0324028 +/- 195.304874 (527.39%) (init = 0.3747312)
+    K_M:    15438.9951 +/- 42767.4319 (277.01%) (init = 150)
+    bias:   0 (fixed)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M) = -1.000
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_25_1.png" src="../_images/Scenario4_25_1.png" />
+</div>
+</div>
+<p>The fit statistics show that the errors for the estimated parameters are very high, exceeding 100%. The visualisation shows, that the model can describe the general course of the measured curves but the standard Michaelis-Menten kinetic, assumes complete conversion of the substrate, causing the curves to approach 0.<br />
+Multiple runs of the fitting process with different initial parameter values and different boundaries for these, resulted all in higher K_M values as the given initial concentrations for the substrate.</p>
+</div>
+<div class="section" id="model-2-parameter-fitting-and-results-a-class-anchor-name-model2-a">
+<h3>Model 2: Parameter fitting and results <a class="anchor" name="Model2"></a><a class="headerlink" href="#model-2-parameter-fitting-and-results-a-class-anchor-name-model2-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 2 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 2: Michaelis-Menten with bias</span>
+<span class="n">result_MM_with_bias</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_MM_with_bias</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">irreversible_Michaelis_Menten</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;irrev. Michaelis-Menten with bias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_MM_with_bias</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_MM_with_bias</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># add bias for visualisation</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted2</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">irreversible_Michaelis_Menten</span><span class="p">,</span> <span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;irreversible Michaelis-Menten with bias&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model2.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 138
+    # data points      = 567
+    # variables        = 3
+    chi-square         = 18934.0263
+    reduced chi-square = 33.5709686
+    Akaike info crit   = 1995.23820
+    Bayesian info crit = 2008.25928
+[[Variables]]
+    k_cat:  38.0326952 +/- 295.044691 (775.77%) (init = 0.3747312)
+    K_M:    15438.9439 +/- 120415.718 (779.95%) (init = 150)
+    bias:   0.65936449 +/- 0.43259950 (65.61%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M)  = 1.000
+    C(K_M, bias)   = -0.531
+    C(k_cat, bias) = -0.530
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_29_1.png" src="../_images/Scenario4_29_1.png" />
+</div>
+</div>
+<p>In the second model a static bis parameter was introduced in an attempt to reflect the end of the curves above zero. The errors of the estimated parameters stayed higher than 100% and the bias failed to reflect the different levels of remaining substrate concentration.</p>
+</div>
+<div class="section" id="model-3-parameter-fitting-and-results-a-class-anchor-name-model3-a">
+<h3>Model 3: Parameter fitting and results <a class="anchor" name="Model3"></a><a class="headerlink" href="#model-3-parameter-fitting-and-results-a-class-anchor-name-model3-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 3 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 3: Michaelis-Menten with time-dependent enzyme inactivation</span>
+<span class="n">result_time_dep_inactivation</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_time_dep_inactivation</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">menten_with_enzyme_inactivation</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Michaelis-Menten time-dep. enzyme inactivation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted3</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">menten_with_enzyme_inactivation</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted3</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Michaelis-Menten with enzyme inactivation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model3.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 50
+    # data points      = 567
+    # variables        = 3
+    chi-square         = 9272.37264
+    reduced chi-square = 16.4403770
+    Akaike info crit   = 1590.44480
+    Bayesian info crit = 1603.46588
+[[Variables]]
+    k_i:    0.00162999 +/- 7.1869e-05 (4.41%) (init = 0.5)
+    k_cat:  1.50694647 +/- 0.16580205 (11.00%) (init = 0.3747312)
+    K_M:    340.402549 +/- 46.9848874 (13.80%) (init = 150)
+    bias:   0 (fixed)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M) = 0.986
+    C(k_i, K_M)   = -0.387
+    C(k_i, k_cat) = -0.241
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_33_1.png" src="../_images/Scenario4_33_1.png" />
+</div>
+</div>
+<p>The third model with time-dependent enzyme inactivation yielded estimated parameters with errors in the range of 4 to 14%. The visualisation shows that the modelled curves in read follow the course of the measured substrate concentrations very closely.</p>
+</div>
+<div class="section" id="model-4-parameter-fitting-and-results-a-class-anchor-name-model4-a">
+<h3>Model 4: Parameter fitting and results <a class="anchor" name="Model4"></a><a class="headerlink" href="#model-4-parameter-fitting-and-results-a-class-anchor-name-model4-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 4 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 4: Michaelis-Menten with time-dependent enzyme inactivation and bias</span>
+<span class="n">result_time_dep_inactivation_with_bias</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_time_dep_inactivation_with_bias</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">menten_with_enzyme_inactivation</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Michaelis-Menten time-dep. enzyme inactivation and bias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation_with_bias</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation_with_bias</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># add bias for visualisation</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">w4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted4</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">menten_with_enzyme_inactivation</span><span class="p">,</span> <span class="n">w4</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted4</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Michaelis-Menten with enzyme inactivation and bias&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model4.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 119
+    # data points      = 567
+    # variables        = 4
+    chi-square         = 8682.52530
+    reduced chi-square = 15.4218922
+    Akaike info crit   = 1555.17766
+    Bayesian info crit = 1572.53910
+[[Variables]]
+    k_i:    0.00177123 +/- 7.3352e-05 (4.14%) (init = 0.5)
+    k_cat:  1.04489418 +/- 0.08058435 (7.71%) (init = 0.3747312)
+    K_M:    190.272492 +/- 22.7606295 (11.96%) (init = 150)
+    bias:   2.02695341 +/- 0.31941453 (15.76%) (init = 0)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M)  = 0.970
+    C(K_M, bias)   = -0.652
+    C(k_cat, bias) = -0.560
+    C(k_i, K_M)    = -0.469
+    C(k_i, bias)   = 0.326
+    C(k_i, k_cat)  = -0.271
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_37_1.png" src="../_images/Scenario4_37_1.png" />
+</div>
+</div>
+<p>The fourth model with time-dependent enzyme inactivation and an additional bias parameter yielded to best fit statistics. The quality criterion, such as the Akaike information criterion had the lowest values, with corresponds to the best quality. As with model 3 the visualisation shows that the modelled red curves follow the measured concentrations. And the estimated K_M value of 190 µM seems to be more plausible than a K_M value of over 15000 µM as for model 1.</p>
+</div>
+<div class="section" id="model-5-parameter-fitting-and-results-a-class-anchor-name-model5-a">
+<h3>Model 5: Parameter fitting and results <a class="anchor" name="Model5"></a><a class="headerlink" href="#model-5-parameter-fitting-and-results-a-class-anchor-name-model5-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 5 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 5: Michaelis-Menten with substrate-dependent enzyme inactivation</span>
+<span class="n">result_substrate_dep_inactivation</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_sub_dep_inactivation</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">menten_with_substrate_dependent_enzyme_inactivation</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Michaelis-Menten sub.-dep. enzyme inactivation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_substrate_dep_inactivation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_substrate_dep_inactivation</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted5</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">menten_with_substrate_dependent_enzyme_inactivation</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted5</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Michaelis-Menten with sub.-dep. enzyme inactivation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model5.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 201
+    # data points      = 567
+    # variables        = 3
+    chi-square         = 13943.5624
+    reduced chi-square = 24.7226283
+    Akaike info crit   = 1821.76868
+    Bayesian info crit = 1834.78976
+[[Variables]]
+    k_i:    1.3847e-05 +/- 1.0131e-06 (7.32%) (init = 0.5)
+    k_cat:  48.9872889 +/- 259.426829 (529.58%) (init = 0.3747312)
+    K_M:    15438.9904 +/- 67909.9877 (439.86%) (init = 150)
+    bias:   0 (fixed)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M) = -1.000
+    C(k_i, k_cat) = 0.323
+    C(k_i, K_M)   = -0.319
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_41_1.png" src="../_images/Scenario4_41_1.png" />
+</div>
+</div>
+<p>While the substrate-dependent enzyme inactivation also models the course of the substrate concentration better than model 1, by approaching zero much slower, it does not fit as well as model 3 and 4. The red curves are not as flat after 1200 seconds as the course of the measured substrate concentration. Also the errors aof the estimated parameters again exceed 100% and the K_M value again becomes extremely large.</p>
+</div>
+<div class="section" id="model-6-parameter-fitting-and-results-a-class-anchor-name-model6-a">
+<h3>Model 6: Parameter fitting and results <a class="anchor" name="Model6"></a><a class="headerlink" href="#model-6-parameter-fitting-and-results-a-class-anchor-name-model6-a" title="Permalink to this headline">¶</a></h3>
+<p>In the next cell the parameters for model 6 are fitted against the measured data and the results are stored in a dictionary.
+The output of the cell after that shows the results from the residual minimisation done by lmfit. Followed by a plot containing the measured data and the curve with the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 6: Michaelis-Menten with substrate-dependent enzyme inactivation and bias</span>
+<span class="n">result_substrate_dep_inactivation_with_bias</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">params_sub_dep_inactivation_with_bias</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">menten_with_substrate_dependent_enzyme_inactivation</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span>
+<span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Michaelis-Menten sub.-dep. enzyme inactivation and bias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_substrate_dep_inactivation_with_bias</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">result_substrate_dep_inactivation_with_bias</span>
+<span class="n">report_fit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># add bias for visualisation</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">w6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">data_fitted6</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">menten_with_substrate_dependent_enzyme_inactivation</span><span class="p">,</span> <span class="n">w6</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">time</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">,))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">measured_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>)==0:
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data_fitted6</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e31a1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Michaelis-Menten with sub.-dep. enzyme inactivation and bias&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+<span class="c1"># save as svg</span>
+<span class="c1">#plt.savefig(&#39;model6.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 445
+    # data points      = 567
+    # variables        = 4
+    chi-square         = 12182.0533
+    reduced chi-square = 21.6377500
+    Akaike info crit   = 1747.19301
+    Bayesian info crit = 1764.55444
+[[Variables]]
+    k_i:    1.8380e-05 +/- 1.0762e-06 (5.86%) (init = 1.4)
+    k_cat:  58.8805947 +/- 342.347158 (581.43%) (init = 50)
+    K_M:    15438.5182 +/- 53446.5006 (346.19%) (init = 10000)
+    bias:   2.84164163 +/- 0.34867450 (12.27%) (init = 2)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_M)  = 1.000
+    C(K_M, bias)   = -0.512
+    C(k_cat, bias) = -0.509
+    C(k_i, bias)   = 0.309
+</pre></div>
+</div>
+<img alt="../_images/Scenario4_45_1.png" src="../_images/Scenario4_45_1.png" />
+</div>
+</div>
+<p>After introducing the bias parameter again, the modelled curves seems to flatten a bit faster, but the fitting only yielded these curves after changing the initial values for the parameters. The estimated errors are still over 100%, with a K_M value of over 15000 µM.</p>
+</div>
+<div class="section" id="table-with-estimated-parameters-for-all-models-a-class-anchor-name-tablemodels-a">
+<h3>Table with estimated parameters for all models <a class="anchor" name="TableModels"></a><a class="headerlink" href="#table-with-estimated-parameters-for-all-models-a-class-anchor-name-tablemodels-a" title="Permalink to this headline">¶</a></h3>
+<p>The results for all models stored in the dictionary are taken and saved in a pandas dataframe which is shown as a table below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_result</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">parameter_name</span><span class="p">,</span> <span class="n">parameter_value</span> <span class="ow">in</span> <span class="n">model_result</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">valuesdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">models_dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">parameter_name</span><span class="p">,</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">parameter_value</span> <span class="o">&gt;</span> <span class="mi">1</span>  <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">models_dataframe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>irreversible Michaelis-Menten</th>
+      <th>irrev. Michaelis-Menten with bias</th>
+      <th>Michaelis-Menten time-dep. enzyme inactivation</th>
+      <th>Michaelis-Menten time-dep. enzyme inactivation and bias</th>
+      <th>Michaelis-Menten sub.-dep. enzyme inactivation</th>
+      <th>Michaelis-Menten sub.-dep. enzyme inactivation and bias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>k_cat</th>
+      <td>37.0</td>
+      <td>38.0000</td>
+      <td>1.5000</td>
+      <td>1.0000</td>
+      <td>49.0</td>
+      <td>58.9</td>
+    </tr>
+    <tr>
+      <th>K_M</th>
+      <td>15439.0</td>
+      <td>15438.9000</td>
+      <td>340.4000</td>
+      <td>190.3000</td>
+      <td>15439.0</td>
+      <td>15438.5</td>
+    </tr>
+    <tr>
+      <th>bias</th>
+      <td>0.0</td>
+      <td>0.6594</td>
+      <td>0.0000</td>
+      <td>2.0000</td>
+      <td>0.0</td>
+      <td>2.8</td>
+    </tr>
+    <tr>
+      <th>k_i</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0016</td>
+      <td>0.0018</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>Model 4 yielded the best quality criterion and the smallest estimated errors for the calculated parameters.<br />
+The introduced k_i parameter describes the inactivation of the enzyme, and with the TODO add citation!!! equation <span class="math notranslate nohighlight">\( t_{1/2} = \frac{\ln 2}{k_i}\)</span> the half-life period can be calculated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_i</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_i&#39;</span><span class="p">]</span>
+<span class="n">halfLifePeriod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">k_i</span><span class="o">/</span><span class="mi">60</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halfLifePeriod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.522288970041359
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model yielded a half-life-period of about 6.5 minutes.<br />
+Since the modelling yielded K_M values higher than the initial substrate concentrations in this experiment, the project partners were advised to repeat the experiment with initial substrate concentrations between 100 and 500 µM if possible.<br />
+In addition an experiment to further investigate the stability of the enzyme was recommended. This could be done similar to the experiment in Scenario 2, with a time-series of measurements.<br />
+Furthermore, the fitting of model 5 and 6 showed, that the results are very dependent on the initial values for the parameters and the set bounds. Therefore, the minimization may only find local and not global minima. And reanalysis of any results with other methods or different initial values should be encouraged.</p>
+</div>
+<div class="section" id="add-model-with-estimated-parameters-to-enzymeml-a-class-anchor-name-addmodel-a">
+<h2>Add model with estimated parameters to EnzymeML <a class="anchor" name="AddModel"></a><a class="headerlink" href="#add-model-with-estimated-parameters-to-enzymeml-a-class-anchor-name-addmodel-a" title="Permalink to this headline">¶</a></h2>
+<p>Since we modelled two coupled differential equations we need to define a second reaction. In SBML each reaction can only be described by a single equation model. For this we will defined the reaction of the enzyme inactivation, with the active enzyme as substrate and the inactive enzyme as product.<br />
+Therefore the inactive enzyme is defined in the next code cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy the old Protein</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getProtein</span><span class="p">(</span><span class="s1">&#39;p0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+
+<span class="c1"># Create new Protein object, modify and add it</span>
+<span class="n">protein2</span> <span class="o">=</span> <span class="n">Protein</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">protein2</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot; inactive&quot;</span>
+<span class="n">protein2</span><span class="o">.</span><span class="n">init_conc</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">protein2</span><span class="o">.</span><span class="n">constant</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">protein2_id</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">addProtein</span><span class="p">(</span><span class="n">protein2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the second reaction is defined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy old reaction</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+
+<span class="c1"># Create new Reaction</span>
+<span class="n">reaction2</span> <span class="o">=</span> <span class="n">EnzymeReaction</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">reaction2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Enzyme inactivation&quot;</span>
+<span class="n">reaction2</span><span class="o">.</span><span class="n">reversible</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Add reaction elements</span>
+<span class="n">reaction2</span><span class="o">.</span><span class="n">addEduct</span><span class="p">(</span><span class="s1">&#39;p0&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">enzmlDoc</span><span class="p">)</span>
+<span class="n">reaction2</span><span class="o">.</span><span class="n">addProduct</span><span class="p">(</span><span class="n">protein2_id</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">enzmlDoc</span><span class="p">)</span>
+
+<span class="c1"># Finally, add it to the document</span>
+<span class="n">reaction2_id</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">addReaction</span><span class="p">(</span><span class="n">reaction2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next the kinetic model is defined with the differential equations and the estimated parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">equation_dsdt</span> <span class="o">=</span> <span class="s2">&quot;- k_cat * p0 * (s0 - bias) / (K_M + s0 - bias)&quot;</span>
+<span class="n">equation_dedt</span> <span class="o">=</span> <span class="s2">&quot;- k_i * p0&quot;</span>
+
+<span class="c1"># parameters:</span>
+<span class="n">kcat_value</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">kcat_unit</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">bias_value</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">bias_unit</span> <span class="o">=</span> <span class="n">conc_unit</span>
+
+<span class="n">km_value</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">km_unit</span> <span class="o">=</span> <span class="n">conc_unit</span>
+
+<span class="n">ki_value</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_i&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ki_unit</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Create a model for the first reaction</span>
+<span class="n">k_cat</span> <span class="o">=</span> <span class="n">KineticParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_cat&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">kcat_value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">kcat_unit</span><span class="p">)</span>
+<span class="n">k_m</span> <span class="o">=</span> <span class="n">KineticParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_M&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">km_value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">km_unit</span><span class="p">)</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">KineticParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bias&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">bias_value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">bias_unit</span><span class="p">)</span>
+
+<span class="n">kineticModel1</span> <span class="o">=</span> <span class="n">KineticModel</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Michaelis Menten with bias&quot;</span><span class="p">,</span>
+    <span class="n">equation</span><span class="o">=</span><span class="n">equation_dsdt</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">k_cat</span><span class="p">,</span> <span class="n">k_m</span><span class="p">,</span> <span class="n">bias</span><span class="p">],</span>
+    <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmlDoc</span>
+<span class="p">)</span>
+
+<span class="c1"># Create model for the second reaction</span>
+<span class="n">k_i</span> <span class="o">=</span> <span class="n">KineticParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_i&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ki_value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">ki_unit</span><span class="p">)</span>
+
+<span class="n">kineticModel2</span> <span class="o">=</span> <span class="n">KineticModel</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Enzyme inactivation&quot;</span><span class="p">,</span>
+    <span class="n">equation</span> <span class="o">=</span> <span class="n">equation_dedt</span><span class="p">,</span> 
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">k_i</span><span class="p">],</span>
+    <span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally the kinetic model is added to the reactions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s1">&#39;r0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">kineticModel1</span><span class="p">,</span> <span class="n">enzmlDoc</span><span class="p">)</span>
+<span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="n">reaction2_id</span><span class="p">)</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">kineticModel2</span><span class="p">,</span> <span class="n">enzmlDoc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to write the EnzymeML document uncomment the next code line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># enzmlDoc.toFile(&#39;../../data/&#39;, &#39;Ngubane_ABTS_Measurements_modelled&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="upload-to-darus-a-class-anchor-name-upload-a">
+<h2>Upload to DaRUS <a class="anchor" name="Upload"></a><a class="headerlink" href="#upload-to-darus-a-class-anchor-name-upload-a" title="Permalink to this headline">¶</a></h2>
+<p>Finally, the EnzymeML document is published on DaRUS and written to the current directory.<br />
+In order to publish a dataset to DaRUS you need an API Token.<br />
+If you want to publish set the <code class="docutils literal notranslate"><span class="pre">publish</span></code> variable to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Then you will be asked for your API Token.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">publish</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
+    <span class="n">API_Token</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter API Token&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
+    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">uploadToDataverse</span><span class="p">(</span>
+        <span class="n">baseURL</span><span class="o">=</span><span class="s2">&quot;https://darus.uni-stuttgart.de/&quot;</span><span class="p">,</span>
+        <span class="n">API_Token</span><span class="o">=</span> <span class="n">API_Token</span><span class="p">,</span>
+        <span class="n">dataverseName</span><span class="o">=</span><span class="s2">&quot;enzymeml_at_work&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Hannah Dienhart<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
