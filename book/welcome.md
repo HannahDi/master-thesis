@@ -7,8 +7,6 @@ I'm Hannah Dienhart and this website contains my master thesis
 In the course of this thesis I developed many Jupyter Notebooks. 
 Here you can find different Scenarios, visualising and modelling the data of some of the __EnzymeML__ project partners.
 
-The final pdf of my master thesis will be automatically generated from this website, only excluding this introductory part. Below you see the tile page of the thesis.
-
-<div style="page-break-after:always;"></div>
+This Jupyter Book will automatically be converted to a LaTex file, which after a few small changes can be converted to the final pdf I will hand in. It won't contain this welcome page but start with the title page you can see below.
 
 ![title](images/title-page.jpg)
