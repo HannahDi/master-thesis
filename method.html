@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
+    <title>Methodology &#8212; FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Declaration of Originality" href="declaration.html" />
+    <link rel="next" title="Scenarios" href="scenarios.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -89,13 +90,13 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
    Welcome
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="declaration.html">
    Declaration of Originality
@@ -116,8 +117,8 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="method.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Methodology
   </a>
  </li>
@@ -214,7 +215,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/welcome.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/method.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -259,7 +260,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Welcome</h1>
+                <h1>Methodology</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -270,17 +271,15 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
-<p><em>Welcome to the written report of my master thesis.</em></p>
-<p>I’m Hannah Dienhart and this website contains my master thesis
-<strong>FAIR modelling of enzyme kinetics by EnzymeML and Jupyter Notebooks</strong> as a Jupyter Book.<br />
-In the course of this thesis I developed many Jupyter Notebooks.
-Here you can find different Scenarios, visualising and modelling the data of some of the <strong>EnzymeML</strong> project partners.</p>
-<p>This Jupyter Book will automatically be converted to a LaTex file, which after a few small changes can be converted to the final pdf I will hand in. It won’t contain this welcome page but start with the title page you can see below.</p>
-<p><img alt="title" src="_images/title-page.jpg" /></p>
-<div class="toctree-wrapper compound">
-</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="methodology">
+<h1>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">¶</a></h1>
+<p><em>The EnzymeML format and toolbox</em></p>
+<p>EnzymeML is a machine-readable data exchange format to document enzymatic data, based on the Systems Biology Markup Language (SBML) TODO cite, in compliance with the STRENDA guidelines TODO cite. It aims to store all relevant metadata of an experiment, information on the involved enzymes together with measured results such as time-course data of substrate and product concentration, thus enabling the seamless exchange of data between experimentalists, modellers and databases TODO Figure.</p>
+<p>EnzymeML is not meant to be read by humans but comes with a toolbox. One crucial software is PyEnzyme, a Python package to read, write and edit EnzymeML. PyEnzyme TODO link can easily be integrated into every Python program and used inside a Jupyter Notebook. In addition, EnzymeML provides an application programming interface (API) TODO link with a RESTful interface, offering the same functions as PyEnzyme.</p>
+<p><em>Jupyter Notebooks</em></p>
+<p>Jupyter Notebook is an application to develop code in a low-entrance level environment. It was first introduced by the project Jupyter TODO cite in 2015. In contrast to other development environments, a Jupyter Notebook is structured into various kinds of cells. Aside from the code cells containing the executable code, it offers markdown cells for descriptive text, equations, and images. This structure makes it possible for non-programmers to follow the code. In addition, Jupyter notebook unfolds its full strength in the ecosystem of sharing platforms such as GitHub, Binder, Notebook Viewer, and Google Colaboratory TODO cite, where developers can share their files for others to use. Furthermore, Colab and Binder lower entry barriers by providing cloud servers to run notebook files online without installing anything on a local machine. Thus, everyone with the link to a notebook file can run it and generate desired output without any prior programming experience. Links to Binder are also incorporated into the website version of this Jupyter Book.</p>
+<p><em>Implementation</em></p>
+<p>Jupyter Notebooks can run various programming languages, but the most common is Python, which is well established in the research community and comes with many packages for data transformation, visualisation and computation. All scenarios in this work are programmed in Python and use PyEnzyme. Data transformations are done with NumPy and pandas, which offer data structures for easy visualisation and calculation. The visualisations are plotted with Matplotlib TODO cite, and tables are rendered from pandas data frames. Finally, the analysis with parameter estimation is done with SciPy and lmfit TODO, which offer many statistical functions, such as linear regression and minimisation methods.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -307,11 +306,18 @@ Here you can find different Scenarios, visualising and modelling the data of som
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="declaration.html" title="next page">
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="scenarios.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Declaration of Originality</p>
+        <p class="prev-next-title">Scenarios</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
