@@ -8,6 +8,7 @@ chapters:
   - file: abstract
   - file: acknowledgements
   - file: intro
+  - file: method
   - file: scenarios
     sections:
     - file: Scenarios/Scenario1
