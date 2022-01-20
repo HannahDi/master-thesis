@@ -303,10 +303,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
+  <a class="reference internal nav-link" href="#visualisation-of-the-rates">
    Visualisation of the rates
-   <a class="anchor" name="RatesVisualisation">
-   </a>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -360,10 +358,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
+  <a class="reference internal nav-link" href="#visualisation-of-the-rates">
    Visualisation of the rates
-   <a class="anchor" name="RatesVisualisation">
-   </a>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -383,15 +379,16 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="scenario-2-measuring-the-stability-of-enzymes">
 <h1>Scenario 2: Measuring the stability of enzymes<a class="headerlink" href="#scenario-2-measuring-the-stability-of-enzymes" title="Permalink to this headline">¶</a></h1>
 <p>Data provided by Amalie Vang Høst (Department of Chemical and Biochemical Engineering, Technical University of Denmark, 2800 Kgs Lyngby, Denmark)</p>
-<p>The dataset for this and all following scenarios were created by Simone Lauterbach. Usually the project partners filled out an EnzymeML spreadsheet template, which is a structured Excel file with Makros. Simone checked the spreadsheets for completeness and converted them into EnzymeML documents.<br />
-In this scenario the time-course data from the EnzymeML document is analysed visually and initial rates are calculated. The analysis of initial rates is very common by many of our project partners and in biocatalysis in general.<br />
-This analysis is a reproduction of the analysis done by Vang Høst in Excel, which she provided us with.</p>
+<p>The datasets for this and all following scenarios were created by Simone Lauterbach. Usually, the project partners fill out an EnzymeML spreadsheet template, which is a structured Excel file with macros. Simone checked the spreadsheets for completeness and converted them into EnzymeML documents.<br />
+In this scenario, the time-course data from the EnzymeML document is analysed visually, and initial rates are calculated. The analysis of initial rates is widespread by many of our project partners and in biocatalysis in general.<br />
+This scenario is a reproduction of the analysis done by Vang Høst in Excel, which she provided us with.<br />
+The initial rate analysis aims to investigate the stability of the enzyme glucose oxidase TODO cite, characterised by activity loss over time in the experimental conditions TODO cite. Measured was glucose oxidation to gluconolactone, which spontaneously hydrolyses to gluconic acid in water.</p>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
-<p>First all necessary Python packages must be installed and imported.<br />
+<p>First, all necessary Python packages must be installed and imported.<br />
 This step is the same for all scenarios and differs only in the used python packages.
-If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
-If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
+If you run this notebook with Binder, you don’t have to install anything. Binder takes care of this.<br />
+If you run this notebook locally, make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -407,9 +404,9 @@ If you run this notebook local make sure you have all Packages installed. All ne
 </div>
 <div class="section" id="reading-enzymeml-with-pyenzyme-software">
 <h2>Reading EnzymeML with PyEnzyme software<a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software" title="Permalink to this headline">¶</a></h2>
-<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
-If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or to change the path accordingly.<br />
-When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software, the file path is defined.<br />
+If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or change the path accordingly.<br />
+When running the following code cell, the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable, and an overview is printed below.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Host_Measurements_orig.omex&#39;</span>
@@ -537,12 +534,12 @@ m10   s6        0       mole / l
 </div>
 </div>
 </div>
-<p>This experiment consists of 11 measurements and each measurement consists of 7 reactants (s0 -s6) and one protein (p0).<br />
-For initial rate calculation only  the time-course data is needed, this is usually analysed in relation to different initial concentrations of the substrate. In this case the stability of the enzyme is of interest, therefore, all 11 measurements (m0 - m10) were carried out under identical conditions and with identical initial concentrations, but the time to add the substrate and start the reaction varied, this information was stored in the measurement names.<br />
-Next one measurement is exemplarily examined.</p>
+<p>This experiment consists of eleven measurements and consisting of seven reactants (s0 -s6) and one protein (p0).<br />
+For initial rate calculation, only  the time-course data is needed. Those are usually analysed in relation to different initial concentrations of the substrate. In this case, the stability of the enzyme is of interest. Therefore, all eleven measurements (m0 - m10) were carried out under identical conditions and with identical initial concentrations, but the time to add the substrate and start the reaction varied. This information was stored in the measurement names.<br />
+Next, one measurement is exemplarily examined.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fetch the measurement</span>
 <span class="n">measurement0</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
 <span class="n">measurement0</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
 </pre></div>
@@ -562,11 +559,11 @@ Next one measurement is exemplarily examined.</p>
 </div>
 </div>
 </div>
-<p>The overview of the initial measurement shows, that the product Gluconic acid (s5) has 3 replicates, these contain the measured time-course data.</p>
+<p>The overview of the initial measurement shows that the product gluconic acid (s5) has three replicates. These contain the measured time-course data.</p>
 </div>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>In this experiment to analyse the stability of the enzyme only the change of the initial rates over time is of interest. Therefore only the measured time-course data and the measurement names containing the time information are stored for each measurement. In order to extract the information of the measurement time, string manipulation is used.</p>
+<p>In this experiment, to analyse the stability of the enzyme, only the change of the initial rates over time is of interest. Therefore only the measured time-course data and the measurement names containing the time information are stored for each measurement. To extract the information of the measurement time, string manipulation is used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise datastructure to store experimental data</span>
@@ -602,8 +599,8 @@ Next one measurement is exemplarily examined.</p>
 </div>
 <div class="section" id="visualisation-of-time-course-data">
 <h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
-<p>All time-course data is visualised with the Python library matplotlib.</p>
-<p>In order to save the figures as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code lines.</p>
+<p>All time-course data is visualised with the Python library Matplotlib.<br />
+To save the figure as SVG uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define colors for time-course visualisation</span>
@@ -635,19 +632,19 @@ Next one measurement is exemplarily examined.</p>
 <img alt="../_images/Scenario2_11_0.png" src="../_images/Scenario2_11_0.png" />
 </div>
 </div>
-<p>The figure shows that the curves were less steep the more time passed.</p>
+<p>The visualisation shows that the curves were less steep the more time passed. The steep light blue curve shows that the time-courses are not entirely linear but starts with a lag phase.</p>
 </div>
 <div class="section" id="computation-of-initial-rates">
 <h2>Computation of initial rates<a class="headerlink" href="#computation-of-initial-rates" title="Permalink to this headline">¶</a></h2>
-<p>To calculate the initial rates the slope of the first 30 data points (0 to 29 seconds) for each replicate is calculated, to be consistent with the calculations done by Vang Høst. This is done with linear regression by the Python library SciPy.<br />
-In order to calculate the slope of another fraction of the time-course change the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> variable accordingly, <code class="docutils literal notranslate"><span class="pre">end</span></code> should not be greater than 59.<br />
-Then the mean from the 3 replicates is calculated for each measurement and saved in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
-With an extinction coefficient of 26 the rates are determined as follows:</p>
+<p>To calculate the initial rates, the slope for each replicate is estimated from the first 30 data points (0 to 29 seconds) to be consistent with the calculations done by Vang Høst. This is done with linear regression by the Python library SciPy.<br />
+To calculate the slope of another fraction of the time-course, change the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> variable accordingly, <code class="docutils literal notranslate"><span class="pre">end</span></code> should not be greater than 59.<br />
+Then the mean from the three replicates is calculated for each measurement and saved in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
+With an extinction coefficient of 26 TODO cite, the rates are determined according to Lambert-Beer law as follows:</p>
 <blockquote>
 <div><p><span class="math notranslate nohighlight">\( rate = \frac{meanOfSlope}{26}*1000\)</span></p>
 </div></blockquote>
 <p>and also stored in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
-And finally the residual activity compared to the initial activity is calculated and stored as well.</p>
+And finally, the residual activity compared to the initial activity is calculated and stored.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
@@ -666,8 +663,8 @@ And finally the residual activity compared to the initial activity is calculated
 </div>
 </div>
 </div>
-<div class="section" id="visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a">
-<h2>Visualisation of the rates <a class="anchor" name="RatesVisualisation"></a><a class="headerlink" href="#visualisation-of-the-rates-a-class-anchor-name-ratesvisualisation-a" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="visualisation-of-the-rates">
+<h2>Visualisation of the rates<a class="headerlink" href="#visualisation-of-the-rates" title="Permalink to this headline">¶</a></h2>
 <p>First the rates are plotted over the time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,8 +675,9 @@ And finally the residual activity compared to the initial activity is calculated
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [h]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;average rate [g/l * 1/s]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># save as svg</span>
-<span class="c1">#plt.savefig(&#39;rates.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="c1"># plt.savefig(&#39;rates.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -698,8 +696,9 @@ And finally the residual activity compared to the initial activity is calculated
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [h]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;residual activity [%]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># save as svg</span>
-<span class="c1">#plt.savefig(&#39;residual-activity.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="c1"># plt.savefig(&#39;residual-activity.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -708,12 +707,11 @@ And finally the residual activity compared to the initial activity is calculated
 <img alt="../_images/Scenario2_18_0.png" src="../_images/Scenario2_18_0.png" />
 </div>
 </div>
-<p>The figures show a decrease of the initial rates over time, which corresponds to the activity of the enzyme. This suggests instability of the enzyme in the given conditions. The greatest loss of activity seems to happen very fast in the first minute.</p>
+<p>The figures show a decrease in the initial rates over time, which corresponds to the enzyme’s activity. This suggests the instability of the enzyme in the given conditions. The greatest activity loss seems to happen very fast in the first minute.</p>
 </div>
 <div class="section" id="upload-to-darus">
 <h2>Upload to DaRUS<a class="headerlink" href="#upload-to-darus" title="Permalink to this headline">¶</a></h2>
-<p>Since this scenario is part of a paper, that is momentarily written. It was uploaded to a DataVerse for this paper on <strong>DaRUS</strong> the data repository of the University of Stuttgart.<br />
-There it got the DOI:</p>
+<p>Since this scenario is part of a momentarily written paper, it will be uploaded to a DataVerse on DaRUS, the data repository of the University of Stuttgart, and get a DOI.</p>
 </div>
 </div>
 
