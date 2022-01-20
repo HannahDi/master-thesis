@@ -367,14 +367,14 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="scenario-1-collecting-data-by-biocathub-and-visualisation">
 <h1>Scenario 1: Collecting data by BioCatHub and visualisation<a class="headerlink" href="#scenario-1-collecting-data-by-biocathub-and-visualisation" title="Permalink to this headline">¶</a></h1>
 <p>Dataset provided by Jan-Dirk Spöring (Institute of Bio- and Geosciences 1, Forschungszentrum Jülich, 52428 Jülich, Germany)</p>
-<p>This is a very short scenario to showcase one of our collaborators, <a class="reference external" href="https://biocathub.net">BioCatHub</a>.<br />
-For this I created, with the help of Stephan Malzacher, the dataset on the <strong>BioCatHub</strong> website, from the data provided by Jan-Dirk Spöring and downloaded it in the <strong>EnzymeML</strong> data-format. The following Jupyter Notebook will read the <strong>EnzymeML</strong> document and visualise the time-course data.<br />
-For this short scenario no modelling is done.</p>
+<p>This is a concise scenario to showcase one of our collaborators, <a class="reference external" href="https://biocathub.net">BioCatHub</a>.<br />
+For this, with the help of Stephan Malzacher, I created the dataset on the BioCatHub website from the data provided by Jan-Dirk Spöring and downloaded it in the EnzymeML data format. The following Jupyter Notebook will read the EnzymeML document and visualise the time-course data.<br />
+For this short scenario, no modelling is done.</p>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
-<p>First all necessary Python packages must be installed and imported.<br />
-If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
-If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
+<p>First, all necessary Python packages must be installed and imported.<br />
+If you run this notebook with Binder, you don’t have to install anything. Binder takes care of this.<br />
+If you run this notebook locally, make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -387,9 +387,9 @@ If you run this notebook local make sure you have all Packages installed. All ne
 </div>
 <div class="section" id="reading-enzymeml-with-pyenzyme-software">
 <h2>Reading EnzymeML with PyEnzyme software<a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software" title="Permalink to this headline">¶</a></h2>
-<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
-If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or to change the path accordingly.<br />
-When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software, the file path is defined.<br />
+If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or change the path accordingly.<br />
+When running the following code cell, the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable, and an overview is printed below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Spoering_Measurements_orig.omex&#39;</span>
@@ -421,10 +421,10 @@ When running the next code cell the EnzymeML document is saved in the <code clas
 </div>
 <p>The overview shows which reactant corresponds to which internal ID. These IDs can be used to access the species.<br />
 The conducted experiments are saved as measurements. These measurements contain information about the experiment conditions such as temperature and pH, initial concentration for all involved species and the measured time-course data. Here each measurement consists of 2 reactants and one protein (p0).
-In this case only 1 measurement was conducted and is examined in the next output.</p>
+Only one measurement was conducted and is examined in the following output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch the measurement and inspect the scheme</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fetch the measurement and inspect the scheme</span>
 <span class="n">measurement</span> <span class="o">=</span> <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="s1">&#39;m0&#39;</span><span class="p">)</span>
 <span class="n">measurement</span><span class="o">.</span><span class="n">printMeasurementScheme</span><span class="p">()</span>
 </pre></div>
@@ -439,11 +439,11 @@ In this case only 1 measurement was conducted and is examined in the next output
 </div>
 </div>
 </div>
-<p>The overview of the measurement shows that the product propioin (s1) has 3 replicates, which contain the measured time-course data.</p>
+<p>The overview of the measurement shows that the product propioin (s1) has three replicates, which contain the measured time-course data.</p>
 </div>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>In this scenario the recorded time-course data should be visualised. To extract the relevant data the inbuilt function <code class="docutils literal notranslate"><span class="pre">exportData</span></code> for the measurement is used. It returns a dictionary with initial concentrations and the time-course data stored in a pandas dataframe, which can be use for a simple visualisation.</p>
+<p>In this scenario, the recorded time-course data should be visualised. The inbuilt function <code class="docutils literal notranslate"><span class="pre">exportData</span></code> for the measurement is used to extract the relevant data. It returns a dictionary with initial concentrations and the time-course data stored in a pandas DataFrame, which can be used for simple visualisation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get reaction name for the title of the visualisation</span>
@@ -525,8 +525,8 @@ In this case only 1 measurement was conducted and is examined in the next output
 </div>
 <div class="section" id="visualisation-of-time-course-data">
 <h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
-<p>The plot shows the synthesis of propioin from propanal. The initial concentration of propanal was 200 mM and two propanal form one propioin. Since the curves don’t reach 100mM, not all propanal was converted.<br />
-In order to save the figure as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code line.</p>
+<p>All time-course data is visualised with the Python library Matplotlib.<br />
+To save the figure as SVG uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -537,7 +537,7 @@ In order to save the figure as svg uncomment the <code class="docutils literal n
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration [mM]&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="c1"># save as svg</span>
-<span class="c1">#plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
+<span class="c1"># plt.savefig(&#39;time-course.svg&#39;, bbox_inches=&#39;tight&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -546,11 +546,11 @@ In order to save the figure as svg uncomment the <code class="docutils literal n
 <img alt="../_images/Scenario1_11_0.png" src="../_images/Scenario1_11_0.png" />
 </div>
 </div>
+<p>The plot shows the synthesis of propioin from propanal. The initial concentration of propanal was 200 mM, and two propanal form one propioin. Since the curves don’t reach 100 mM, not all propanal was converted.</p>
 </div>
 <div class="section" id="upload-to-darus">
 <h2>Upload to DaRUS<a class="headerlink" href="#upload-to-darus" title="Permalink to this headline">¶</a></h2>
-<p>Since this scenario is part of a paper, that is momentarily written. It was uploaded to a DataVerse for this paper on <strong>DaRUS</strong> the data repository of the University of Stuttgart.<br />
-There it got the DOI:</p>
+<p>Since this scenario is part of a momentarily written paper, it will be uploaded to a DataVerse on DaRUS, the data repository of the University of Stuttgart, and get a DOI.</p>
 </div>
 <div class="section" id="final-remarks">
 <h2>Final remarks<a class="headerlink" href="#final-remarks" title="Permalink to this headline">¶</a></h2>
