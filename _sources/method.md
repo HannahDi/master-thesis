@@ -12,3 +12,7 @@ Jupyter Notebook is an application to develop code in a low-entrance level envir
 _Implementation_
 
 Jupyter Notebooks can run various programming languages, but the most common is Python, which is well established in the research community and comes with many packages for data transformation, visualisation and computation. All scenarios in this work are programmed in Python and use PyEnzyme. Data transformations are done with NumPy and pandas, which offer data structures for easy visualisation and calculation. The visualisations are plotted with Matplotlib TODO cite, and tables are rendered from pandas data frames. Finally, the analysis with parameter estimation is done with SciPy and lmfit TODO, which offer many statistical functions, such as linear regression and minimisation methods. 
+
+_Written report_
+
+This report was written as a Jupyter Book, consisting of markdown files and Jupyter Notebooks. From these, a website is automatically built and hosted as a GitHub page. In addition, Jupyter book provides the functionality to generate a LaTex file, which is only slightly edited for the final pdf. 
