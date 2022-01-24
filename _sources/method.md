@@ -1,7 +1,14 @@
 # Methodology 
 _The EnzymeML format and toolbox_
 
-EnzymeML is a machine-readable data exchange format to document enzymatic data, based on the Systems Biology Markup Language (SBML) {cite}`sbml_2003`, in compliance with the STRENDA guidelines {cite}`strenda_2014`. It aims to store all relevant metadata of an experiment, information on the involved enzymes together with measured results such as time-course data of substrate and product concentration {cite}`enzml_2_2021`, thus enabling the seamless exchange of data between experimentalists, modellers and databases TODO Figure. 
+EnzymeML is a machine-readable data exchange format to document enzymatic data, based on the Systems Biology Markup Language (SBML) {cite}`sbml_2003`, in compliance with the STRENDA guidelines {cite}`strenda_2014`. It aims to store all relevant metadata of an experiment, information on the involved enzymes together with measured results such as time-course data of substrate and product concentration {cite}`enzml_2_2021`, thus enabling the seamless exchange of data between experimentalists, modellers and databases as shown below. 
+
+```{figure} ../images/Fig1.png
+---
+name: fig1
+---
+Schematic representation of the EnzymeML data format as a link between experimental platforms, modelling platforms and publication platforms.
+```
 
 EnzymeML is not meant to be read by humans but comes with a toolbox. One crucial software is PyEnzyme {cite}`pyenzyme_2021`, a Python package to read, write and edit EnzymeML. PyEnzyme can easily be integrated into every Python program and used inside a Jupyter Notebook. In addition, EnzymeML provides an application programming interface ([API](https://enzymeml.sloppy.zone/)) with a RESTful interface, offering the same functions as PyEnzyme. 
 
