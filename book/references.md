@@ -1,5 +1,3 @@
-<div style="page-break-after:always;"></div>
-
 # References
 ```{bibliography}
 ```
