@@ -283,10 +283,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
    Reading EnzymeML with PyEnzyme software
-   <a class="anchor" name="ReadingEnzymeML">
-   </a>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -375,10 +373,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+  <a class="reference internal nav-link" href="#upload-to-darus">
    Upload to DaRUS
-   <a class="anchor" name="Upload">
-   </a>
   </a>
  </li>
 </ul>
@@ -407,10 +403,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
+  <a class="reference internal nav-link" href="#reading-enzymeml-with-pyenzyme-software">
    Reading EnzymeML with PyEnzyme software
-   <a class="anchor" name="ReadingEnzymeML">
-   </a>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -499,10 +493,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#upload-to-darus-a-class-anchor-name-upload-a">
+  <a class="reference internal nav-link" href="#upload-to-darus">
    Upload to DaRUS
-   <a class="anchor" name="Upload">
-   </a>
   </a>
  </li>
 </ul>
@@ -520,10 +512,10 @@
 <p>In this scenario the oxidation of ABTS catalysed by Trametes pubescens laccase has been investigated. In contrast to the previous scenario, not only initial rates but the whole time-course data was modelled.</p>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
-<p>First all necessary Python packages must be installed and imported.<br />
+<p>First, all necessary Python packages must be installed and imported.<br />
 This step is the same for all scenarios and differs only in the used python packages.
-If you run this notebook with Binder you don’t have to install anything, Binder takes care of this.<br />
-If you run this notebook local make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
+If you run this notebook with Binder, you don’t have to install anything. Binder takes care of this.<br />
+If you run this notebook locally, make sure you have all Packages installed. All needed packages with the used version can be found in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the root GitHub directory (not in <code class="docutils literal notranslate"><span class="pre">\book</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -542,10 +534,11 @@ If you run this notebook local make sure you have all Packages installed. All ne
 </div>
 </div>
 </div>
-<div class="section" id="reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a">
-<h2>Reading EnzymeML with PyEnzyme software <a class="anchor" name="ReadingEnzymeML"></a><a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software-a-class-anchor-name-readingenzymeml-a" title="Permalink to this headline">¶</a></h2>
-<p>In order to read the EnzymeML document and access its content with the PyEnzyme software the file path is defined.<br />
-When running the next code cell the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable and an overview is printed below.</p>
+<div class="section" id="reading-enzymeml-with-pyenzyme-software">
+<h2>Reading EnzymeML with PyEnzyme software<a class="headerlink" href="#reading-enzymeml-with-pyenzyme-software" title="Permalink to this headline">¶</a></h2>
+<p>In order to read the EnzymeML document and access its content with the PyEnzyme software, the file path is defined.<br />
+If you want to run this Jupyter Notebook locally, make sure you have the same folder structure or change the path accordingly.<br />
+When running the following code cell, the EnzymeML document is saved in the <code class="docutils literal notranslate"><span class="pre">enzmlDoc</span></code> variable, and an overview is printed below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../../data/Ngubane_ABTS_Measurements_orig.omex&#39;</span>
@@ -652,8 +645,8 @@ All relevant data such as the initial concentrations and time-course data are ex
 </div>
 <div class="section" id="visualisation-of-time-course-data">
 <h2>Visualisation of time-course data<a class="headerlink" href="#visualisation-of-time-course-data" title="Permalink to this headline">¶</a></h2>
-<p>All time-course data is visualised with the Python library matplotlib.<br />
-In order to save the figures as svg uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code lines.</p>
+<p>All time-course data is visualised with the Python library Matplotlib.<br />
+To save the figure as SVG uncomment the <code class="docutils literal notranslate"><span class="pre">plt.savefig(...)</span></code> code line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get reaction name for the title of the visualisation</span>
@@ -1309,7 +1302,7 @@ The output of the cell after that shows the results from the residual minimisati
 <div class="section" id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
 <p>Model 4 yielded the best quality criterion and the smallest estimated errors for the calculated parameters.<br />
-The introduced k_i parameter describes the inactivation of the enzyme, and with the TODO add citation!!! equation <span class="math notranslate nohighlight">\( t_{1/2} = \frac{\ln 2}{k_i}\)</span> the half-life period can be calculated:</p>
+The introduced k_i parameter describes the inactivation of the enzyme, and with the equation <span class="math notranslate nohighlight">\( t_{1/2} = \frac{\ln 2}{k_i}\)</span> the half-life period can be calculated <span id="id1">[<a class="reference internal" href="../references.html#id25">Bux15</a>]</span> :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_i</span> <span class="o">=</span> <span class="n">result_time_dep_inactivation_with_bias</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;k_i&#39;</span><span class="p">]</span>
@@ -1431,38 +1424,9 @@ Therefore the inactive enzyme is defined in the next code cell.</p>
 </div>
 </div>
 </div>
-<div class="section" id="upload-to-darus-a-class-anchor-name-upload-a">
-<h2>Upload to DaRUS <a class="anchor" name="Upload"></a><a class="headerlink" href="#upload-to-darus-a-class-anchor-name-upload-a" title="Permalink to this headline">¶</a></h2>
-<p>Finally, the EnzymeML document is published on DaRUS and written to the current directory.<br />
-In order to publish a dataset to DaRUS you need an API Token.<br />
-If you want to publish set the <code class="docutils literal notranslate"><span class="pre">publish</span></code> variable to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Then you will be asked for your API Token.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">publish</span> <span class="o">=</span> <span class="kc">False</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
-    <span class="n">API_Token</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter API Token&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">publish</span><span class="p">:</span>
-    <span class="n">enzmlDoc</span><span class="o">.</span><span class="n">uploadToDataverse</span><span class="p">(</span>
-        <span class="n">baseURL</span><span class="o">=</span><span class="s2">&quot;https://darus.uni-stuttgart.de/&quot;</span><span class="p">,</span>
-        <span class="n">API_Token</span><span class="o">=</span> <span class="n">API_Token</span><span class="p">,</span>
-        <span class="n">dataverseName</span><span class="o">=</span><span class="s2">&quot;enzymeml_at_work&quot;</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="upload-to-darus">
+<h2>Upload to DaRUS<a class="headerlink" href="#upload-to-darus" title="Permalink to this headline">¶</a></h2>
+<p>Since this scenario is part of a momentarily written paper, it will be uploaded to a DataVerse on DaRUS, the data repository of the University of Stuttgart, and get a DOI.</p>
 </div>
 </div>
 

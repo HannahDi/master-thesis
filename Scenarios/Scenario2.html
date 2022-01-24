@@ -382,7 +382,7 @@
 <p>The datasets for this and all following scenarios were created by Simone Lauterbach. Usually, the project partners fill out an EnzymeML spreadsheet template, which is a structured Excel file with macros. Simone checked the spreadsheets for completeness and converted them into EnzymeML documents.<br />
 In this scenario, the time-course data from the EnzymeML document is analysed visually, and initial rates are calculated. The analysis of initial rates is widespread by many of our project partners and in biocatalysis in general.<br />
 This scenario is a reproduction of the analysis done by Vang Høst in Excel, which she provided us with.<br />
-The initial rate analysis aims to investigate the stability of the enzyme glucose oxidase TODO cite, characterised by activity loss over time in the experimental conditions TODO cite. Measured was glucose oxidation to gluconolactone, which spontaneously hydrolyses to gluconic acid in water.</p>
+The initial rate analysis aims to investigate the stability of the enzyme glucose oxidase, characterised by activity loss over time in the experimental conditions. Measured was glucose oxidation to gluconolactone, which spontaneously hydrolyses to gluconic acid in water.</p>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p>First, all necessary Python packages must be installed and imported.<br />
@@ -639,7 +639,7 @@ To save the figure as SVG uncomment the <code class="docutils literal notranslat
 <p>To calculate the initial rates, the slope for each replicate is estimated from the first 30 data points (0 to 29 seconds) to be consistent with the calculations done by Vang Høst. This is done with linear regression by the Python library SciPy.<br />
 To calculate the slope of another fraction of the time-course, change the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> variable accordingly, <code class="docutils literal notranslate"><span class="pre">end</span></code> should not be greater than 59.<br />
 Then the mean from the three replicates is calculated for each measurement and saved in <code class="docutils literal notranslate"><span class="pre">experimentalData</span></code>.<br />
-With an extinction coefficient of 26 TODO cite, the rates are determined according to Lambert-Beer law as follows:</p>
+With an extinction coefficient of 26 <span id="id1">[<a class="reference internal" href="../references.html#id23">HvHJF07</a>]</span>, the rates are determined according to Lambert-Beer law as follows:</p>
 <blockquote>
 <div><p><span class="math notranslate nohighlight">\( rate = \frac{meanOfSlope}{26}*1000\)</span></p>
 </div></blockquote>
