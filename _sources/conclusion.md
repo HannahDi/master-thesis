@@ -1,5 +1,3 @@
-<div style="page-break-after:always;"></div>
+# Conclusion
 
-# Conclusion and Outlook
-
-TODO
+Combining the standardised exchange format EnzymeML and the descriptive programming environment Jupyter Notebook makes a seamless flow of data from the experiment to analysis to publication possible. Jupyter Notebooks are already popular in the research community and are an excellent expansion to the EnzymeML toolbox. As a result, the study of enzymes can be facilitated under the FAIR principles and in a sustainable manner.
