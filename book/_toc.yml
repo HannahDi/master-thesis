@@ -19,3 +19,5 @@ chapters:
   - file: conclusion
   - file: references
   - file: appendix
+    sections:
+    -file: Scenarios/ScenarioA
