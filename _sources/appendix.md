@@ -1,6 +1,5 @@
-<div style="page-break-after:always;"></div>
-
 # Appendix
 
-TODO (Scenario Malzacher ?)
-* Internet resources (website, GitHub), DOI (Zenodo, DaRUS)
+__Additional material__
+Website: 
+GitHub repository:
