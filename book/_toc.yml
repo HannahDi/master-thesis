@@ -20,4 +20,4 @@ chapters:
   - file: references
   - file: appendix
     sections:
-    -file: Scenarios/ScenarioA
+    - file: Scenarios/ScenarioA
